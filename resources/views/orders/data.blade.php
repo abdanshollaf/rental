@@ -72,54 +72,24 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                                 <tr>
-                                                    <th class="text-center centervertical" rowspan="2"><p> No.</p></th>
+                                                    <th class="text-center" width="3%">No.</th>
                                                     <th>Nama Pelanggan</th>
-                                                    <th>Kendaraan</th>
-                                                    <th>Nama Driver</th>
-                                                    <th>Penjemputan</th>
-                                                    <th>Tujuan</th>
-                                                    <th class="text-center centervertical" rowspan="2"><p> Total Harga</p></th>
-                                                    <th class="text-center centervertical" rowspan="2"><p> Action</p></th>
-                                                </tr>
-                                                <tr>
-                                                    <th>No. Hp</th>
-                                                    <th>No. Polisi</th>
-                                                    <th>No. Hp</th>
-                                                    <th>Tanggal Dan Jam</th>
-                                                    <th>Tanggal Dan Jam</th>
+                                                    <th>No. Telp</th>
+                                                    <th>Jumlah Booking</th>
+                                                    <th>Total Harga</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($data as $indexKey => $items )
+                                                @foreach ($order as $indexKey => $items )
                                                     <tr>
                                                         <td class="text-center centervertical"><div><p>{{$indexKey+1}}</p></div></td>
-                                                        <td><?php echo \App\Models\Master\CustomerModel::find($items->id_pelanggan)->first()->nama_pelanggan ?>
-                                                            <hr>
-                                                            <?php echo \App\Models\Master\CustomerModel::find($items->id_pelanggan)->first()->no_telp ?>
-                                                        </td>
-                                                        <td><?php echo \App\Models\Master\MobilModel::find($items->id_mobil)->first()->merk ?> - <?php echo \App\Models\Master\MobilModel::find($items->id_mobil)->first()->tipe ?>
-                                                            <hr>
-                                                            <?php echo \App\Models\Master\MobilModel::find($items->id_mobil)->first()->no_polisi ?>
-                                                        </td>
-                                                        <td><?php echo \App\Models\Master\DriverModel::find($items->id_driver)->first()->nama ?>
-                                                            <hr>
-                                                            <?php echo \App\Models\Master\DriverModel::find($items->id_driver)->first()->no_telp ?>
-                                                        </td>
-                                                        <td>{{$items->jemput}}
-                                                            <hr>
-                                                            {{$items->start_date}} - {{$items->start_time}}
-                                                        </td>
-                                                        <td>{{$items->tujuan}}
-                                                            <hr>
-                                                            {{$items->finish_date}} - {{$items->finish_time}}
-                                                        </td>
-                                                        <td class="text-center centervertical">
-                                                            <p>
-                                                                {{$items->total_tagihan}}
-                                                            </p>
-                                                        </td>
+                                                        <td>{{\App\Models\Master\CustomerModel::find($items->id_pelanggan)->first()->nama_pelanggan}}</td>
+                                                        <td>{{$items->no_telp}}</td>
+                                                        <td>{{\App\Models\Order\OrderDetailModel::where('id_order','=',$items->id)->count()}}</td>
+                                                        <td>{{$items->actual}}</td>
                                                         <td>
-                                                            <button class="btn btn-warning btn-sm edit-modal"><span class="fas fa-edit"></span></button>
+                                                            <button class="btn btn-warning btn-sm edit-modal" href="{{route('orderedit')}}"><span class="fas fa-edit"></span></button>
                                                             <button class="btn btn-info btn-sm"><span class="fas fa-print"></span></button>
                                                             <button class="btn btn-danger btn-sm delete-modal"><span class="fas fa-trash"></span></button>
                                                         </td>

@@ -17,8 +17,9 @@ class OrderCont extends Controller
 {
     public function index(){
         if (Auth::check()) {
-            $data = OrderDetailModel::orderBy('start_date','DESC')->get();
-            return view('orders/data',['data' => $data]);
+            $order = OrderModel::get();
+            //dd($order);
+            return view('orders/data',['order' => $order]);
         }
         else {
             return redirect()->route('login');
@@ -57,40 +58,41 @@ class OrderCont extends Controller
         //         'harga[]' => 'required'
         //     ]);
             
-            // dd($request->all());
+            dd(array_sum(intval($request->detail->harga)));
 
-            // $customer = new CustomerModel();
-            // $customer->nama_pelanggan = $request->nama;
-            // $customer->email = $request->email;
-            // $customer->tgl_lahir = $request->tgl_lahir;
-            // $customer->alamat = $request->alamat;
-            // $customer->no_telp = $request->telp;
-            // $customer->id_tipe_pelanggan = $request->tipe;
-            // $customer->status_order = '1';
-            // $customer->save();
+            $customer = new CustomerModel();
+            $customer->nama_pelanggan = $request->nama;
+            $customer->email = $request->email;
+            $customer->tgl_lahir = $request->tgl_lahir;
+            $customer->alamat = $request->alamat;
+            $customer->no_telp = intval($request->telp);
+            $customer->id_tipe_pelanggan = $request->tipe;
+            $customer->status_order = '1';
+            $customer->save();
            
-            // $order = new OrderModel();
-            // $order->id_tipe_pelanggan = $request->tipe;
-            // $order->id_pelanggan = $customer->id;
-            // $order->nama_pelanggan = $request->nama;
-            // $order->no_telp = $request->telp;
-            // $order->email = $request->email;
-            // $order->estimated = $request->harga;
-            // $order->actual = $request->harga;
-            // $order->save();
+            $order = new OrderModel();
+            $order->id_tipe_pelanggan = $request->tipe;
+            $order->id_pelanggan = $customer->id;
+            $order->nama_pelanggan = $request->nama;
+            $order->no_telp = intval($request->telp);
+            $order->email = $request->email;
+            $order->estimated = intval($request->harga);
+            $order->actual = array_sum(intval($request->detail->harga));
+            $order->save();
 
-            $order_detail = new OrderDetailModel();
             foreach ($request->detail as $key => $value) {
+                $order_detail = new OrderDetailModel();
                 $order_detail->id_order = $order->id;
                 $order_detail->id_tipe_pelanggan = $request->tipe;
+                $order_detail->no_telp = intval($request->telp);
                 $order_detail->id_pelanggan = $customer->id;
                 $order_detail->id_driver = $value['driver'];
-                $order_detail->start_date = date('Y-m-d', strtotime($value['start_date']));
-                $order_detail->finish_date = $value['end_date']->format('Y-m-d');
+                $order_detail->start_date = date('y-m-d', strtotime($value['start_date']));
+                $order_detail->finish_date = date('y-m-d', strtotime($value['end_date']));
                 $order_detail->jemput = $value['jemput'];
                 $order_detail->tujuan = $value['tujuan'];
-                $order_detail->start_time = $value['start_time']->format('H:i');
-                $order_detail->finish_time = $value['end_time']->format('H:i');
+                $order_detail->start_time = date('H:i', strtotime($value['start_time']));
+                $order_detail->finish_time = date('H:i', strtotime($value['end_time']));
                 $order_detail->id_mobil = $value['mobil'];
                 $order_detail->harga_mobil = 0;
                 $order_detail->harga_driver = 0;
@@ -105,7 +107,7 @@ class OrderCont extends Controller
                 $order_detail->diskon = 0;
                 $order_detail->ppn = 0;
                 $order_detail->pph = 0;
-                $order_detail->total_tagihan = $value['harga'];
+                $order_detail->total_tagihan = intval($value['harga']);
                 $order_detail->save();
             }
             
@@ -116,10 +118,13 @@ class OrderCont extends Controller
         // }
     }
 
-    public function edit(){
+    public function edit($id){
+        $order = OrderModel::find($id)->get();
+        $orderdetail = DB::select("select * from t_oder_detail where id_order = '".$id."'");
+        return view('orders/edit',['order'=>$order,'orderdetail'=>$orderdetail]);
     }
 
-    public function update(){
+    public function update($id, Request $request){
 
     }
 
