@@ -59,25 +59,25 @@ class OrderCont extends Controller
             
             // dd($request->all());
 
-            $customer = new CustomerModel();
-            $customer->nama_pelanggan = $request->nama;
-            $customer->email = $request->email;
-            $customer->tgl_lahir = $request->tgl_lahir;
-            $customer->alamat = $request->alamat;
-            $customer->no_telp = $request->telp;
-            $customer->id_tipe_pelanggan = $request->tipe;
-            $customer->status_order = '1';
-            $customer->save();
+            // $customer = new CustomerModel();
+            // $customer->nama_pelanggan = $request->nama;
+            // $customer->email = $request->email;
+            // $customer->tgl_lahir = $request->tgl_lahir;
+            // $customer->alamat = $request->alamat;
+            // $customer->no_telp = $request->telp;
+            // $customer->id_tipe_pelanggan = $request->tipe;
+            // $customer->status_order = '1';
+            // $customer->save();
            
-            $order = new OrderModel();
-            $order->id_tipe_pelanggan = $request->tipe;
-            $order->id_pelanggan = $customer->id;
-            $order->nama_pelanggan = $request->nama;
-            $order->no_telp = $request->telp;
-            $order->email = $request->email;
-            $order->estimated = $request->harga;
-            $order->actual = $request->harga;
-            $order->save();
+            // $order = new OrderModel();
+            // $order->id_tipe_pelanggan = $request->tipe;
+            // $order->id_pelanggan = $customer->id;
+            // $order->nama_pelanggan = $request->nama;
+            // $order->no_telp = $request->telp;
+            // $order->email = $request->email;
+            // $order->estimated = $request->harga;
+            // $order->actual = $request->harga;
+            // $order->save();
 
             $order_detail = new OrderDetailModel();
             foreach ($request->detail as $key => $value) {
