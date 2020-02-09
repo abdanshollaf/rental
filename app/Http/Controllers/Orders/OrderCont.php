@@ -38,6 +38,12 @@ class OrderCont extends Controller
     }
 
     public function store(Request $request){
+        //// added check line 42-45; 84
+        // $sum = 0;
+        // foreach($request->detail as $key=>$item){
+        //     $sum += $item['harga'];
+        // }
+
         // if ($request->all()) {
         //     $this->validate($request, [
         //         'nama' => 'required',
@@ -56,7 +62,7 @@ class OrderCont extends Controller
         //         'end_time[]' => 'required',
         //         'harga[]' => 'required'
         //     ]);
-            
+
             // dd($request->all());
 
             // $customer = new CustomerModel();
@@ -68,14 +74,15 @@ class OrderCont extends Controller
             // $customer->id_tipe_pelanggan = $request->tipe;
             // $customer->status_order = '1';
             // $customer->save();
-           
+
             // $order = new OrderModel();
             // $order->id_tipe_pelanggan = $request->tipe;
             // $order->id_pelanggan = $customer->id;
             // $order->nama_pelanggan = $request->nama;
             // $order->no_telp = $request->telp;
             // $order->email = $request->email;
-            // $order->estimated = $request->harga;
+            // $order->estimated = $request->harga; --> replace to $order->estimated = $sum;
+
             // $order->actual = $request->harga;
             // $order->save();
 
@@ -108,7 +115,7 @@ class OrderCont extends Controller
                 $order_detail->total_tagihan = $value['harga'];
                 $order_detail->save();
             }
-            
+
             Session::flash('success_msg','Data Added Successfully');
             return redirect()->route('orderindex');
         // } else {
