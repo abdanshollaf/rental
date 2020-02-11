@@ -89,9 +89,9 @@
                                                         <td>{{\App\Models\Order\OrderDetailModel::where('id_order','=',$items->id)->count()}}</td>
                                                         <td>{{$items->actual}}</td>
                                                         <td>
-                                                            <button class="btn btn-warning btn-sm edit-modal" href="{{route('orderedit')}}"><span class="fas fa-edit"></span></button>
-                                                            <button class="btn btn-info btn-sm"><span class="fas fa-print"></span></button>
-                                                            <button class="btn btn-danger btn-sm delete-modal"><span class="fas fa-trash"></span></button>
+                                                            <a class="btn btn-secondary btn-sm edit-modal" href="{{route('orderedit',$items->id)}}"><span class="fas fa-edit"></span></a>
+                                                            <a class="btn btn-info btn-sm"><span class="fas fa-print text-white"></span></a>
+                                                            <a class="btn btn-danger btn-sm delete-modal"><span class="fas fa-trash text-white"></span></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -153,7 +153,6 @@
                             </div>
                         </div>
                     </div>
-                    @include('orders/modal')
                     <!-- /.card -->
                 </div>
             </div>

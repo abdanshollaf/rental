@@ -174,10 +174,10 @@
                     format: 'YYYY-MM-DD'
                 });
                 $('#start_time' + index).datetimepicker({
-                    format: 'LT'
+                    format: 'HH:mm'
                 });
                 $('#end_time' + index).datetimepicker({
-                    format: 'LT'
+                    format: 'HH:mm'
                 });
                 console.log('#end_time' + index + '');
                 //resetDatePicker();
@@ -198,10 +198,10 @@
                     format: 'YYYY-MM-DD'
                 });
                 $('#start_time').datetimepicker({
-                    format: 'LT'
+                    format: 'HH:mm'
                 });
                 $('#end_time').datetimepicker({
-                    format: 'LT'
+                    format: 'HH:mm'
                 });
             });
             // $(document).ready(function() {

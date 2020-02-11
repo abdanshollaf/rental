@@ -149,7 +149,7 @@
                             </td>
                             <td>
                               <?php
-                              $tipe = App\Models\TipePelangganModel::all()->where('id', '=', $item['id_tipe_pelanggan']);
+                              $tipe = App\Models\Master\TipePelangganModel::all()->where('id', '=', $item['id_tipe_pelanggan']);
                               ?>
                               @foreach ($tipe as $items)
                               <div>{{$items->nama_tipe_pelanggan}}</div>
