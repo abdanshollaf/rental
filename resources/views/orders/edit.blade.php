@@ -92,12 +92,12 @@
                                         <div class="form-group col-sm-5">
                                             <label for="tgl">Tanggal Booking</label>
                                                     <div class="input-group date" data-target-input="nearest">
-                                                        <input type="text" id="start_date" name="detail[{{$key}}][start_date]" value="{{$orderdetail[$key]->start_date}}" class="form-control datetimepicker-input" disabled/>
+                                                        <input type="text" id="start_date{{$key}}" name="detail[{{$key}}][start_date]" value="{{$orderdetail[$key]->start_date}}" class="form-control datetimepicker-input" disabled/>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                             <div class="input-group-text"><i class="fas fa-arrow-right"></i></div>
                                                         </div>
-                                                        <input type="text" id="end_date" name="detail[{{$key}}][end_date]" value="{{$orderdetail[$key]->finish_date}}" class="form-control datetimepicker-input" disabled/>
+                                                        <input type="text" id="end_date{{$key}}" name="detail[{{$key}}][end_date]" value="{{$orderdetail[$key]->finish_date}}" class="form-control datetimepicker-input" disabled/>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                         </div>
@@ -106,12 +106,12 @@
                                         <div class="form-group col-sm-5">
                                             <label for="jam">Jam Booking</label>
                                                     <div class="input-group date" data-target-input="nearest">
-                                                        <input type="text" id="start_time" value="{{$orderdetail[$key]->start_time}}" name="detail[{{$key}}][start_time]" class="form-control datetimepicker-input" disabled/>
+                                                        <input type="text" id="start_time{{$key}}" value="{{$orderdetail[$key]->start_time}}" name="detail[{{$key}}][start_time]" class="form-control datetimepicker-input" disabled/>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text"><i class="fas fa-clock"></i></div>
                                                             <div class="input-group-text"><i class="fas fa-arrow-right"></i></div>
                                                         </div>
-                                                        <input type="text" id="end_time" value="{{$orderdetail[$key]->finish_time}}" name="detail[{{$key}}][end_time]" class="form-control datetimepicker-input" disabled/>
+                                                        <input type="text" id="end_time{{$key}}" value="{{$orderdetail[$key]->finish_time}}" name="detail[{{$key}}][end_time]" class="form-control datetimepicker-input" disabled/>
                                                         <div class="input-group-append" data-target="#end_time" data-toggle="datetimepicker">
                                                             <div class="input-group-text"><i class="fas fa-clock"></i></div>
                                                         </div>
@@ -119,11 +119,11 @@
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label for="input">Total Harga Input</label>
-                                            <input type="number" class="form-control" id="input" disabled value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][input]" placeholder="Enter Price" required>
+                                            <input type="number" class="form-control" id="input{{$key}}" disabled value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][input]" placeholder="Enter Price" required>
                                         </div> 
                                         <div class="form-group col-sm-2">
                                                     <label for="mobil">Tipe Mobil</label>
-                                                    <select name="detail[{{$key}}][mobil]" id="mobil" class="form-control" required>
+                                                    <select name="detail[{{$key}}][mobil]" id="mobil{{$key}}" class="form-control" required>
                                                         <option selected="selected" value="{{$orderdetail[$key]->id_mobil}}"><?php echo \App\Models\Master\MobilModel::find($orderdetail[$key]->id_mobil)->no_polisi; echo " - "; echo \App\Models\Master\MobilModel::find($orderdetail[$key]->id_mobil)->merk; echo " "; echo \App\Models\Master\MobilModel::find($orderdetail[$key]->id_mobil)->tipe; ?></option>
                                                             @foreach ($mobil as $item)
                                                                 <option value="{{$item->id}}">{{$item->no_polisi}} - {{$item->merk}} {{$item->tipe}}</option>
@@ -132,7 +132,7 @@
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="driver">Driver</label>
-                                                    <select name="detail[{{$key}}][driver]" id="driver" class="form-control" required>
+                                                    <select name="detail[{{$key}}][driver]" id="driver{{$key}}" class="form-control" required>
                                                         <option selected="selected" value="{{$orderdetail[$key]->id_driver}}"><?php echo \App\Models\Master\DriverModel::find($orderdetail[$key]->id_driver)->nama ?></option>
                                                         @foreach ($driver as $item)
                                                         <option value="{{$item->id}}">{{$item->nama}}</option>
@@ -141,73 +141,74 @@
                                         </div>
                                         <div class="form-group col-sm-3">
                                                     <label for="jemput">Alamat Penjemputan</label>
-                                                    <input type="text" class="form-control" value="{{$orderdetail[$key]->jemput}}" id="jemput" name="detail[{{$key}}][jemput]" placeholder="Enter Departure Address" required>
+                                                    <input type="text" class="form-control" value="{{$orderdetail[$key]->jemput}}" id="jemput{{$key}}" name="detail[{{$key}}][jemput]" placeholder="Enter Departure Address" required>
                                         </div>
                                         <div class="form-group col-sm-3">
                                                     <label for="tujuan">Tujuan</label>
-                                                    <input type="text" class="form-control" value="{{$orderdetail[$key]->tujuan}}" id="tujuan" name="detail[{{$key}}][tujuan]" placeholder="Enter Arrival Address" required>
+                                                    <input type="text" class="form-control" value="{{$orderdetail[$key]->tujuan}}" id="tujuan{{$key}}" name="detail[{{$key}}][tujuan]" placeholder="Enter Arrival Address" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="carprice">Biaya Mobil</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="carprice" value="{{$orderdetail[$key]->harga_mobil}}" name="detail[{{$key}}][carprice]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="carprice{{$key}}" value="{{$orderdetail[$key]->harga_mobil}}" name="detail[{{$key}}][carprice]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="driverprice">Biaya Driver</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="driverprice" value="{{$orderdetail[$key]->harga_driver}}" name="detail[{{$key}}][driverprice]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="driverprice{{$key}}" value="{{$orderdetail[$key]->harga_driver}}" name="detail[{{$key}}][driverprice]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="jalan">Uang Jalan</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="jalan" value="{{$orderdetail[$key]->uang_jalan}}" name="detail[{{$key}}][jalan]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="jalan{{$key}}" value="{{$orderdetail[$key]->uang_jalan}}" name="detail[{{$key}}][jalan]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="bbm">Bahan Bakar</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="bbm" value="{{$orderdetail[$key]->bbm}}" name="detail[{{$key}}][bbm]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="bbm{{$key}}" value="{{$orderdetail[$key]->bbm}}" name="detail[{{$key}}][bbm]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="tolparkir">Tol Parkir</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="tolparkir" value="{{$orderdetail[$key]->tol_parkir}}" name="detail[{{$key}}][tolparkir]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="tolparkir{{$key}}" value="{{$orderdetail[$key]->tol_parkir}}" name="detail[{{$key}}][tolparkir]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="makaninap">Makan & Inap</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="makaninap" value="{{$orderdetail[$key]->makan_inap}}" name="detail[{{$key}}][makaninap]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="makaninap{{$key}}" value="{{$orderdetail[$key]->makan_inap}}" name="detail[{{$key}}][makaninap]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="overtime">Overtime</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="overtime" value="{{$orderdetail[$key]->overtime}}" name="detail[{{$key}}][overtime]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="overtime{{$key}}" value="{{$orderdetail[$key]->overtime}}" name="detail[{{$key}}][overtime]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="titip">Biaya Titip</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="titip" value="{{$orderdetail[$key]->biaya_titip}}" name="detail[{{$key}}][titip]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="titip{{$key}}" value="{{$orderdetail[$key]->biaya_titip}}" name="detail[{{$key}}][titip]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="biaya">Total Biaya</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="biaya" value="{{$orderdetail[$key]->total_harga}}" name="detail[{{$key}}][biaya]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="biaya{{$key}}" value="{{$orderdetail[$key]->total_harga}}" name="detail[{{$key}}][biaya]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="diskon">Diskon</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="diskon" value="{{$orderdetail[$key]->diskon}}" name="detail[{{$key}}][diskon]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="diskon{{$key}}" value="{{$orderdetail[$key]->diskon}}" name="detail[{{$key}}][diskon]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="ppn">PPN</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="ppn" value="{{$orderdetail[$key]->ppn}}" name="detail[{{$key}}][ppn]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="ppn{{$key}}" value="{{$orderdetail[$key]->ppn}}" name="detail[{{$key}}][ppn]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="pph">PPH</label>
-                                                    <input type="number" class="form-control price{{$key}}" id="pph" value="{{$orderdetail[$key]->pph}}" name="detail[{{$key}}][pph]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control price{{$key}}" id="pph{{$key}}" value="{{$orderdetail[$key]->pph}}" name="detail[{{$key}}][pph]" placeholder="Enter Price" required>
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="total_harga">Total Tagihan</label>
-                                                    <input type="number" data-key="{{$key}}" class="form-control total_harga{{$key}}" id="total_harga" disabled value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][total_harga]" placeholder="Enter Price" required>
+                                                    <input type="number" class="form-control total_harga{{$key}}" id="total_harga{{$key}}" disabled value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][total_harga]" placeholder="Enter Price" required>
                                         </div> 
                                         <script type="text/javascript">
-                                            var index = $(this).data('key');
-                                            $(document).on("change", ".price" + index, function() {
+                                            var count = '<?php echo json_encode($key);?>';
+                                            // console.log(count);
+                                            $(document).on("change", ".price" + count, function() {
                                                 var sum = 0;
-                                                $(".price" + index).each(function(){
+                                                $(".price" + count).each(function(){
                                                     sum += +$(this).val();
                                                 });
-                                                $(".total_harga" + index).val(sum);
-                                            });
+                                                $(".total_harga" + count).val(sum);
+                                            });  
                                         </script>
                                         <br/>
                                     <br/>
@@ -216,6 +217,10 @@
                                     <br/>
                                     <br/>
                                     @endforeach
+                                    <div class="form-group col-sm-2">
+                                        <label for="dibayar">Dibayar</label>
+                                        <input type="number" class="form-control " id="dibayar" name="dibayar" placeholder="Enter Price" required>
+                                    </div> 
                             </div>
                           <!-- /.card-body -->
                           <div class="container">
@@ -283,6 +288,19 @@
                     format: 'HH:mm'
                 });
             });
+
+            // var count = '<?php echo json_encode(count($orderdetail));?>';
+            // for ( index = count-1; index >= 0; index++) {
+            //     $(document).on("change", ".price" + index, function() {
+            //         var sum = 0;
+            //         $(".price" + index).each(function(){
+            //             sum += +$(this).val();
+            //         });
+            //         $(".total_harga" + index).val(sum);
+            //         console.log(count);
+            //     });   
+            // }
+            // console.log(count);
             // $(document).ready(function() {
 
             //     var index = 1;
