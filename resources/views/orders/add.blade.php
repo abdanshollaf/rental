@@ -147,7 +147,7 @@
                             <br/>
                             <div class="form-group col-sm-2">
                                 <label for="harga">Dibayar</label>
-                                <input type="number" class="form-control" id="dibayar" name="detail[0][dibayar]" placeholder="Enter Price" required>
+                                <input type="number" value="0" class="form-control" id="dibayar" name="detail[0][dibayar]" placeholder="Enter Price" required>
                             </div>
                           <!-- /.card-body -->
                           <div class="container">

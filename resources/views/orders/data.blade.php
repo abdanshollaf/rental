@@ -82,17 +82,20 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($order as $indexKey => $items )
-                                                    <tr>
-                                                        <td class="text-center centervertical"><div><p>{{$indexKey+1}}</p></div></td>
-                                                        <td>{{\App\Models\Master\CustomerModel::find($items->id_pelanggan)->first()->nama_pelanggan}}</td>
-                                                        <td>{{$items->no_telp}}</td>
-                                                        <td>{{\App\Models\Order\OrderDetailModel::where('id_order','=',$items->id)->count()}}</td>
-                                                        <td>{{$items->actual}}</td>
-                                                        <td>
-                                                            <a class="btn btn-secondary btn-sm edit-modal" href="{{route('orderedit',$items->id)}}"><span class="fas fa-edit"></span></a>
-                                                            <a class="btn btn-info btn-sm"><span class="fas fa-print text-white"></span></a>
-                                                            <a class="btn btn-danger btn-sm delete-modal"><span class="fas fa-trash text-white"></span></a>
+                                                    <tr class="items{{$items->id}}">
+                                                        <td  class="text-center centervertical col1"><div><p>{{$indexKey+1}}</p></div></td>
+                                                        <td><div>{{$items->nama_pelanggan = \App\Models\Master\CustomerModel::find($items->id_pelanggan)->first()->nama_pelanggan}}</div></td>
+                                                        <td><div>{{$items->no_telp}}</div></td>
+                                                        <td><div>{{$items->jumlah = \App\Models\Order\OrderDetailModel::where('id_order','=',$items->id)->count()}}</div></td>
+                                                        <td><div>{{$items->actual}}</div></td>
+                                                        <td width="20%">
+                                                            <a class="btn btn-secondary btn-sm" href="{{route('orderedit',$items->id)}}"><span class="fas fa-edit"></span></a>
+                                                            <a class="btn btn-info btn-sm show-modal"><span class="fas fa-eye text-white"></span></a>
+                                                            <a class="btn btn-danger btn-sm delete-modal" data-id="{{$items->id}}"
+                                                                data-pelanggan="{{$items->nama_pelanggan}}" data-telp="{{$items->no_polisi}}"
+                                                                data-count="{{$items->jumlah}}" data-actual="{{$items->actual}}"><span class="fas fa-trash text-white"></span></a>
                                                         </td>
+                                                        @include('orders/modal')
                                                     </tr>
                                                 @endforeach
                                             </tbody>

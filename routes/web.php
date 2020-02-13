@@ -69,6 +69,6 @@ Route::get('/orders/index','Orders\OrderCont@index')->name('orderindex');
 Route::get('/orders/add','Orders\OrderCont@create')->name('orderadd');
 Route::post('/order/create','Orders\OrderCont@store')->name('orderstore');
 Route::get('/orders/edit/{id}','Orders\OrderCont@edit')->name('orderedit');
-Route::post('/order/update/{id}','Orders\OrderCont@update')->name('orderupdate');
-
+Route::post('/orders/update/{id}','Orders\OrderCont@update')->name('orderupdate');
+Route::get('/orders/delete/{id}','Orders\OrderCont@delete')->name('orderdelete');
 

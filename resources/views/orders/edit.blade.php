@@ -197,18 +197,18 @@
                                         </div>
                                         <div class="form-group col-sm-2">
                                                     <label for="total_harga">Total Tagihan</label>
-                                                    <input type="number" class="form-control total_harga{{$key}}" id="total_harga{{$key}}" disabled value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][total_harga]" placeholder="Enter Price" required>
-                                        </div> 
+                                                    <input type="number" class="form-control total_harga{{$key}}" id="total_harga{{$key}}" value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][total_harga]" placeholder="Enter Price" required>
+                                        </div>
                                         <script type="text/javascript">
-                                            var count = '<?php echo json_encode($key);?>';
-                                            // console.log(count);
-                                            $(document).on("change", ".price" + count, function() {
-                                                var sum = 0;
-                                                $(".price" + count).each(function(){
-                                                    sum += +$(this).val();
-                                                });
-                                                $(".total_harga" + count).val(sum);
-                                            });  
+                                            // var count = '<?php echo json_encode($key);?>';
+                                            //     $(document).on("change", ".price" + count, function() {
+                                            //         var sum = 0;
+                                            //         $(".price" + count).each(function(){
+                                            //             sum += +$(this).val();
+                                            //         });
+                                            //         $(".total_harga" + count).val(sum);
+                                            //         console.log($(".total_harga" + count).val(sum));
+                                            //     });
                                         </script>
                                         <br/>
                                     <br/>
@@ -288,17 +288,39 @@
                     format: 'HH:mm'
                 });
             });
-
+            
+            // function sum(){
+            //     var count = '<?php echo json_encode(count($orderdetail));?>';
+            //     for ( index = 1; index <= count ; index++) {
+            //         var txt1 = document.getElementById('carprice'+ index + '').value;
+            //         var txt2 = document.getElementById('driverprice'+ index + '').value;
+            //         var txt3 = document.getElementById('jalan'+ index + '').value;
+            //         var txt4 = document.getElementById('bbm'+ index + '').value;
+            //         var txt5 = document.getElementById('tolparkir'+ index + '').value;
+            //         var txt6 = document.getElementById('makaninap'+ index + '').value;
+            //         var txt7 = document.getElementById('overtime'+ index + '').value;
+            //         var txt8 = document.getElementById('titip'+ index + '').value;
+            //         var txt9 = document.getElementById('biaya'+ index + '').value;
+            //         var txt10 = document.getElementById('diskon'+ index + '').value;
+            //         var txt11 = document.getElementById('ppn'+ index + '').value;
+            //         var txt12 = document.getElementById('pph'+ index + '').value;
+            //         var result = parseInt(txt1) + parseInt(txt2) + parseInt(txt3) + parseInt(txt4) + parseInt(txt5) + parseInt(txt6) + parseInt(txt7) + parseInt(txt8) + parseInt(txt9) + parseInt(txt10) + parseInt(txt11) + parseInt(txt12);
+            //         document.getElementById('total_harga' + index).value = result;
+            //         console.log(result)
+            //     }
+            // }
             // var count = '<?php echo json_encode(count($orderdetail));?>';
-            // for ( index = count-1; index >= 0; index++) {
+
+            // for ( index = count-1; index >= 0; index--) {
             //     $(document).on("change", ".price" + index, function() {
             //         var sum = 0;
             //         $(".price" + index).each(function(){
             //             sum += +$(this).val();
             //         });
             //         $(".total_harga" + index).val(sum);
-            //         console.log(count);
-            //     });   
+            //         console.log($(".total_harga" + index).val(sum));
+            //     });
+                
             // }
             // console.log(count);
             // $(document).ready(function() {
