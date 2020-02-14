@@ -147,71 +147,60 @@
                                                     <label for="tujuan">Tujuan</label>
                                                     <input type="text" class="form-control" value="{{$orderdetail[$key]->tujuan}}" id="tujuan{{$key}}" name="detail[{{$key}}][tujuan]" placeholder="Enter Arrival Address" required>
                                         </div>
-                                        <div class="sumrow">
-                                        <div class="form-group col-sm-2">
-                                                    <label for="carprice">Biaya Mobil</label>
-                                                    <input type="number" class="form-control price" id="carprice{{$key}}" value="{{$orderdetail[$key]->harga_mobil}}" name="detail[{{$key}}][carprice]" placeholder="Enter Price" required>
+                                        <div class="sumrow form-group">
+                                            <div class="form-group col-sm-10">
+                                                        <label for="carprice">Biaya Mobil</label>
+                                                        <input type="number" class="form-control price" id="carprice{{$key}}" value="{{$orderdetail[$key]->harga_mobil}}" name="detail[{{$key}}][carprice]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="driverprice">Biaya Driver</label>
+                                                        <input type="number" class="form-control price" id="driverprice{{$key}}" value="{{$orderdetail[$key]->harga_driver}}" name="detail[{{$key}}][driverprice]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="jalan">Uang Jalan</label>
+                                                        <input type="number" class="form-control price" id="jalan{{$key}}" value="{{$orderdetail[$key]->uang_jalan}}" name="detail[{{$key}}][jalan]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="bbm">Bahan Bakar</label>
+                                                        <input type="number" class="form-control price" id="bbm{{$key}}" value="{{$orderdetail[$key]->bbm}}" name="detail[{{$key}}][bbm]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="tolparkir">Tol Parkir</label>
+                                                        <input type="number" class="form-control price" id="tolparkir{{$key}}" value="{{$orderdetail[$key]->tol_parkir}}" name="detail[{{$key}}][tolparkir]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="makaninap">Makan & Inap</label>
+                                                        <input type="number" class="form-control price" id="makaninap{{$key}}" value="{{$orderdetail[$key]->makan_inap}}" name="detail[{{$key}}][makaninap]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="overtime">Overtime</label>
+                                                        <input type="number" class="form-control price" id="overtime{{$key}}" value="{{$orderdetail[$key]->overtime}}" name="detail[{{$key}}][overtime]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="titip">Biaya Titip</label>
+                                                        <input type="number" class="form-control price" id="titip{{$key}}" value="{{$orderdetail[$key]->biaya_titip}}" name="detail[{{$key}}][titip]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="biaya">Total Biaya</label>
+                                                        <input type="number" class="form-control biaya price2" id="biaya{{$key}}" value="{{$orderdetail[$key]->total_harga}}" name="detail[{{$key}}][biaya]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="diskon">Diskon</label>
+                                                        <input type="number" class="form-control price2" id="diskon{{$key}}" value="{{$orderdetail[$key]->diskon}}" name="detail[{{$key}}][diskon]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="ppn">PPN</label>
+                                                        <input type="number" class="form-control price" id="ppn{{$key}}" value="{{$orderdetail[$key]->ppn}}" name="detail[{{$key}}][ppn]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="pph">PPH</label>
+                                                        <input type="number" class="form-control price" id="pph{{$key}}" value="{{$orderdetail[$key]->pph}}" name="detail[{{$key}}][pph]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                        <label for="total_harga">Total Tagihan</label>
+                                                        <input type="number" class="form-control total_harga" id="total_harga{{$key}}" value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][total_harga]" placeholder="Enter Price" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="driverprice">Biaya Driver</label>
-                                                    <input type="number" class="form-control price" id="driverprice{{$key}}" value="{{$orderdetail[$key]->harga_driver}}" name="detail[{{$key}}][driverprice]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="jalan">Uang Jalan</label>
-                                                    <input type="number" class="form-control price" id="jalan{{$key}}" value="{{$orderdetail[$key]->uang_jalan}}" name="detail[{{$key}}][jalan]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="bbm">Bahan Bakar</label>
-                                                    <input type="number" class="form-control price" id="bbm{{$key}}" value="{{$orderdetail[$key]->bbm}}" name="detail[{{$key}}][bbm]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="tolparkir">Tol Parkir</label>
-                                                    <input type="number" class="form-control price" id="tolparkir{{$key}}" value="{{$orderdetail[$key]->tol_parkir}}" name="detail[{{$key}}][tolparkir]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="makaninap">Makan & Inap</label>
-                                                    <input type="number" class="form-control price" id="makaninap{{$key}}" value="{{$orderdetail[$key]->makan_inap}}" name="detail[{{$key}}][makaninap]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="overtime">Overtime</label>
-                                                    <input type="number" class="form-control price" id="overtime{{$key}}" value="{{$orderdetail[$key]->overtime}}" name="detail[{{$key}}][overtime]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="titip">Biaya Titip</label>
-                                                    <input type="number" class="form-control price" id="titip{{$key}}" value="{{$orderdetail[$key]->biaya_titip}}" name="detail[{{$key}}][titip]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="biaya">Total Biaya</label>
-                                                    <input type="number" class="form-control price" id="biaya{{$key}}" value="{{$orderdetail[$key]->total_harga}}" name="detail[{{$key}}][biaya]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="diskon">Diskon</label>
-                                                    <input type="number" class="form-control price" id="diskon{{$key}}" value="{{$orderdetail[$key]->diskon}}" name="detail[{{$key}}][diskon]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="ppn">PPN</label>
-                                                    <input type="number" class="form-control price" id="ppn{{$key}}" value="{{$orderdetail[$key]->ppn}}" name="detail[{{$key}}][ppn]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="pph">PPH</label>
-                                                    <input type="number" class="form-control price" id="pph{{$key}}" value="{{$orderdetail[$key]->pph}}" name="detail[{{$key}}][pph]" placeholder="Enter Price" required>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                                    <label for="total_harga">Total Tagihan</label>
-                                                    <input type="number" class="form-control total_harga" id="total_harga{{$key}}" value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][total_harga]" placeholder="Enter Price" required>
-                                        </div>
-                                        </div>
-                                        <script type="text/javascript">
-                                            // var count = '<?php echo json_encode($key);?>';
-                                            //     $(document).on("change", ".price" + count, function() {
-                                            //         var sum = 0;
-                                            //         $(".price" + count).each(function(){
-                                            //             sum += +$(this).val();
-                                            //         });
-                                            //         $(".total_harga" + count).val(sum);
-                                            //         console.log($(".total_harga" + count).val(sum));
-                                            //     });
-                                        </script>
                                         <br/>
                                     <br/>
                                     <br/>
@@ -243,14 +232,28 @@
         <script type="text/javascript">
         $(document).on('change','.price',function(){
             $('.sumrow').each(function(){
-                var total = $(this).find('.total_harga');
+                var biaya = $(this).find('.biaya');
                 let value = 0;
                 $(this).find('.price').each(function(){
                     value += Number($(this).val())
-                })
-                total.val(value)
-            })
-        })
+                });
+                biaya.val(value);
+                console.log(value);
+            });
+        });
+
+        $(document).on('change','.price2',function(){
+            $('.sumrow').each(function(){
+                var total = $(this).find('.total_harga');
+                var value2 = Number($(this).find('.biaya').val());
+                console.log(value2);
+                $(this).find('.price2').each(function(){
+                    // console.log(Number($(this).val()));
+                    value2 = value2 -  Number($(this).val())
+                });
+                total.val(value2);
+            });
+        });
         // var index = 0;
         //     $(document).on("change", ".price" + index, function() {
         //         var sum = 0;
