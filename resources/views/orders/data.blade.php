@@ -1,4 +1,14 @@
 @extends('layouts.app.app')
+@section('title')
+    <title>Admin Panel | Order Data</title>
+@endsection
+@section('left-header')
+<li class="nav-item">
+  <a class="nav-link active"><h5>Orders / Order Data</h5></a>
+</li>
+@endsection
+@include('orders/sidebar')
+
 @section('content')
 <style>
     .centervertical { 
@@ -16,22 +26,7 @@
     }
     </style>
 <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Orders</h1>
-              </div><!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item">Orders</a></li>
-                  <li class="breadcrumb-item active">Orders Data</li>
-                </ol>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-          </div><!-- /.container-fluid -->
-        </div>
+    <br/>
 <section class="content">
     @if($errors->any())
             <div class="alert alert-danger">
@@ -84,24 +79,24 @@
                                                 @foreach ($order as $indexKey => $items )
                                                     <tr class="items{{$items->id}}">
                                                         <td  class="text-center centervertical col1"><div><p>{{$indexKey+1}}</p></div></td>
-                                                        <td><div>{{$items->nama_pelanggan = \App\Models\Master\CustomerModel::find($items->id_pelanggan)->first()->nama_pelanggan}}</div></td>
+                                                        <td><div>{{$items->nama_pelanggan}}</div></td>
                                                         <td><div>{{$items->no_telp}}</div></td>
-                                                        <td><div>{{$items->jumlah = \App\Models\Order\OrderDetailModel::where('id_order','=',$items->id)->count()}}</div></td>
+                                                        <td width="14%" class="text-center"><div>{{$item2 = \App\Models\Order\OrderDetailModel::where('id_order','=',$items->id)->count()}}</div></td>
                                                         <td><div>{{$items->actual}}</div></td>
-                                                        <td width="20%">
+                                                        <td width="15%">
                                                             <a class="btn btn-secondary btn-sm" href="{{route('orderedit',$items->id)}}"><span class="fas fa-edit"></span></a>
-                                                            <a class="btn btn-info btn-sm show-modal"><span class="fas fa-eye text-white"></span></a>
+                                                            <a class="btn btn-info btn-sm" href="{{route('ordershow',$items->id)}}"><span class="fas fa-eye text-white"></span></a>
                                                             <a class="btn btn-danger btn-sm delete-modal" data-id="{{$items->id}}"
                                                                 data-pelanggan="{{$items->nama_pelanggan}}" data-telp="{{$items->no_polisi}}"
-                                                                data-count="{{$items->jumlah}}" data-actual="{{$items->actual}}"><span class="fas fa-trash text-white"></span></a>
+                                                                data-count="{{$item2}}" data-actual="{{$items->actual}}"><span class="fas fa-trash text-white"></span></a>
                                                         </td>
-                                                        @include('orders/modal')
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </table> 
                             </div>
+                            @include('orders/modal')
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
                                     <table id="example2" class="table table-bordered table-striped">
                                             <thead>

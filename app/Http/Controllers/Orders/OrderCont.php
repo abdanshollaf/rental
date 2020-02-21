@@ -11,8 +11,11 @@ use App\Models\Master\TipePelangganModel;
 use App\Models\Master\DriverModel;
 use App\Models\Order\OrderModel;
 use App\Models\Order\OrderDetailModel;
+use App\Models\Master\CashflowModel;
 use Session;
 use DB;
+use PDF;
+use View;
 
 class OrderCont extends Controller
 {
@@ -40,33 +43,10 @@ class OrderCont extends Controller
     }
 
     public function store(Request $request){
-        //// added check line 42-45; 84
-        // dd($request->all());
         $sum = 0;
         foreach($request->detail as $key=>$item){
             $sum += $item['harga'];
         }
-
-        // if ($request->all()) {
-        //     $this->validate($request, [
-        //         'nama' => 'required',
-        //         'tipe' => 'required',
-        //         'email' => 'required',
-        //         'telp' => 'required',
-        //         'alamat' => 'required',
-        //         'tgl_lahir' => 'required',
-        //         'mobil[]' => 'required',
-        //         'driver[]' => 'required',
-        //         'jemput[]' => 'required',
-        //         'tujuan[]' => 'required',
-        //         'start_date[]' => 'required',
-        //         'end_date[]' => 'required',
-        //         'start_time[]' => 'required',
-        //         'end_time[]' => 'required',
-        //         'harga[]' => 'required'
-        //     ]);
-            
-            //dd($sum);
 
             $customer = new CustomerModel();
             $customer->nama_pelanggan = $request->nama;
@@ -85,7 +65,7 @@ class OrderCont extends Controller
             $order->no_telp = intval($request->telp);
             $order->email = $request->email;
             $order->dibayar = $request->dibayar;
-            if ($request->dibayar == $sum) {
+            if ($request->dibayar >= $sum) {
                 $order->status = 1;
             }
             elseif ($request->dibayar <= $sum) {
@@ -98,7 +78,25 @@ class OrderCont extends Controller
             }
             $order->estimated = $sum;
             $order->actual = $sum;
+            $order->oleh = Auth::user()->id;
             $order->save();
+            // dd($order->status);
+            if ($order->status == 1) {
+                $cash = new CashflowModel();
+                $cash->id_master_cashflow = 1;
+                $cash->id_order = $order->id;
+                $cash->amount = $request->dibayar;
+                $cash->oleh = Auth::user()->id;
+                $cash->save();
+            }
+            if ($order->status == 2) {
+                $cash = new CashflowModel();
+                $cash->id_master_cashflow = 1;
+                $cash->id_order = $order->id;
+                $cash->amount = $request->dibayar;
+                $cash->oleh = Auth::user()->id;
+                $cash->save();
+            }
 
 
             foreach ($request->detail as $key => $value) {
@@ -124,19 +122,17 @@ class OrderCont extends Controller
                 $order_detail->overtime = 0;
                 $order_detail->biaya_titip = 0;
                 $order_detail->biaya_lainnya = 0;
-                $order_detail->total_harga = 0;
+                $order_detail->total_harga = intval($value['harga']);
                 $order_detail->diskon = 0;
                 $order_detail->ppn = 0;
                 $order_detail->pph = 0;
                 $order_detail->total_tagihan = intval($value['harga']);
+                $order_detail->by = Auth::user()->id;
                 $order_detail->save();
             }
 
             Session::flash('success_msg','Data Added Successfully');
             return redirect()->route('orderindex');
-        // } else {
-        //     return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
-        // }
     }
 
     public function edit($id){
@@ -147,7 +143,6 @@ class OrderCont extends Controller
             $mobil = MobilModel::get();
             $driver = DriverModel::get();
             $orderdetail = DB::select("select * from t_order_detail where id_order = '".$id."'");
-            // dd($pelanggan);
             return view('orders/edit', ['pelanggan'=>$pelanggan, 'orderdetail' => $orderdetail, 'orders' => $orders, 'tipe' => $tipe, 'mobil' => $mobil, 'driver' => $driver]);
         }
         else {
@@ -157,16 +152,27 @@ class OrderCont extends Controller
     }
 
     public function update($id, Request $request){
-        // dd($request->all());
         $sum = 0;
         foreach($request->detail as $key=>$item){
             $sum += $item['total_harga'];
         }
-        //dd($sum);
            
             $order = OrderModel::find($id);
             if ($request->dibayar == $sum) {
                 $order->status = 1;
+                $cashflow = DB::select("select * from t_cashflow where id_order = '".$id."'");
+                if ($cashflow != null) {
+                    $cashflow->update(['amount' => $request->dibayar,
+                                        'oleh' => Auth::user()->id]);
+                }
+                elseif ($cashflow == null) {
+                    $cash = new CashflowModel();
+                    $cash->id_master_cashflow = 1;
+                    $cash->id_order = $order->id;
+                    $cash->amount = $request->dibayar;
+                    $cash->oleh = Auth::user()->id;
+                    $cash->save();
+                }
             }
             else if ($request->dibayar <= $sum) {
                 if ($request->dibayar == 0) {
@@ -175,14 +181,27 @@ class OrderCont extends Controller
                 else {
                     $order->status = 2;
                 }
+                $cashflow = CashflowModel::where('id_order','=',$id);
+                // dd($cashflow);
+                if ($cashflow != null) {
+                    $cashflow->update(['amount' => $request->dibayar,
+                                        'oleh' => Auth::user()->id]);
+                }
+                elseif ($cashflow == null) {
+                    $cash = new CashflowModel();
+                    $cash->id_master_cashflow = 1;
+                    $cash->id_order = $order->id;
+                    $cash->amount = $sum;
+                    $cash->oleh = Auth::user()->id;
+                    $cash->save();
+                }
             }
             $order->actual = $sum;
             $order->dibayar = $request->dibayar;
-            $order->by = Auth::user()->name;
+            $order->oleh = Auth::user()->id;
             $order->save();
 
             $order_details = DB::select("select * from t_order_detail where id_order = '".$id."'");
-            //dd($order_details);
             foreach ($order_details as $key => $value) {
                 if ($value->total_tagihan == intval($request->detail[$key]['total_harga'])) {
                     $biaya_lainnya = 0;
@@ -211,49 +230,53 @@ class OrderCont extends Controller
                         'diskon' => $request->detail[$key]['diskon'],
                         'ppn' => $request->detail[$key]['ppn'],
                         'pph' => $request->detail[$key]['pph'],
-                        'total_tagihan' => $request->detail[$key]['total_harga']]);
-                // $value->id_mobil = $request->detail[$key]['mobil'];
-                // $value->id_driver = $request->detail[$key]['driver'];
-                // $value->jemput = $request->detail[$key]['jemput'];
-                // $value->tujuan = $request->detail[$key]['tujuan'];
-                // $value->harga_mobil = intval($request->detail[$key]['carprice']);
-                // $value->harga_driver = intval($request->detail[$key]['driverprice']);
-                // $value->uang_jalan = intval($request->detail[$key]['jalan']);
-                // $value->bbm = intval($request->detail[$key]['bbm']);
-                // $value->tol_parkir = intval($request->detail[$key]['tolparkir']);
-                // $value->makan_inap = intval($request->detail[$key]['makaninap']);
-                // $value->overtime = intval($request->detail[$key]['overtime']);
-                // $value->biaya_titip = intval($request->detail[$key]['titip']);
-                // if ($value->total_tagihan == intval($request->detail[$key]['total_harga'])) {
-                //     $value->biaya_lainnya = 0;
-                // }
-                // if ($value->total_tagihan > intval($request->detail[$key]['total_harga'])) {
-                //     $value->biaya_lainnya = $value->total_tagihan - intval($request->detail[$key]['total_harga']);
-                // }
-                // if ($value->total_tagihan < intval($request->detail[$key]['total_harga'])) {
-                //     $value->biaya_lainnya = intval($request->detail[$key]['total_harga']) - $value->total_tagihan;
-                // }
-                // $value->total_harga = intval($request->detail[$key]['biaya']);
-                // $value->diskon = intval($request->detail[$key]['diskon']);
-                // $value->ppn = intval($request->detail[$key]['ppn']);
-                // $value->pph = intval($request->detail[$key]['pph']);
-                // $value->total_tagihan = intval($request->detail[$key]['total_harga']);
-                // $order_details[$key]->save();
+                        'total_tagihan' => $request->detail[$key]['total_harga'],
+                        'by' => Auth::user()->id]);
             }
-            // dd($biaya_lainnya);
-            Session::flash('success_msg','Data Added Successfully');
+            Session::flash('success_msg','Data Updated Successfully');
             return redirect()->route('orderindex');
     }
     
     public function show($id){
+        
+        if (Auth::check()) {
+            $orders = OrderModel::find($id);
+            $orderdetail = DB::select("select * from t_order_detail where id_order = '".$id."'");
+            foreach ($orderdetail as $key => $value) {
+                $date1 = date_create($value->start_date);
+                $date2 = date_create($value->finish_date);
+                $datediff = date_diff($date1,$date2)->format('%a');
+            }
+            return view('orders/show',['orders' => $orders,'orderdetail'=>$orderdetail]);
+        }
+        else {
+            return redirect()->route('login');
+        }
+    }
 
+    public function openPDF($id){
+        if (Auth::check()) {
+            $orders = OrderModel::find($id);
+            $orderdetail = DB::select("select * from t_order_detail where id_order = '".$id."'");
+            return view('orders/orderPDF',['orders'=>$orders,'orderdetail'=>$orderdetail]);
+        }
+        else {
+            return redirect()->route('login');
+        }
     }
 
     public function delete($id){
         $orderdetail= DB::select("delete from t_order_detail where id_order = '".$id."'");
         $order = OrderModel::find($id);
-        $order->dihapus = Auth::user()->name;
+        $order->dihapus = Auth::user()->id;
         $order->save();
+        $cash = CashflowModel::where('id_order','=',$id)->update(['dihapus' => Auth::user()->id]);
+        $cashflow = DB::select("delete from t_cashflow where id_order = '".$id."'");
+        $customer = CustomerModel::find($order->id_pelanggan);
+        if (OrderModel::where('id_pelanggan','=',$customer->id)->count() == 1) {
+            $customer->status_order = 0;
+            $customer->save();
+        }
         $delete = OrderModel::find($id)->delete();
         return response()->json($delete);
     }

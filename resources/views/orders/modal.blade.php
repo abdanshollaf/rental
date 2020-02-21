@@ -1,19 +1,3 @@
-<div id="showModal" class="modal fade modal-lg" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-        </div>
-    </div>
-  </div>
-
-
-
 <div id="deleteModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -70,5 +70,8 @@ Route::get('/orders/add','Orders\OrderCont@create')->name('orderadd');
 Route::post('/order/create','Orders\OrderCont@store')->name('orderstore');
 Route::get('/orders/edit/{id}','Orders\OrderCont@edit')->name('orderedit');
 Route::post('/orders/update/{id}','Orders\OrderCont@update')->name('orderupdate');
+Route::get('/orders/show/{id}','Orders\OrderCont@show')->name('ordershow');
 Route::get('/orders/delete/{id}','Orders\OrderCont@delete')->name('orderdelete');
+Route::get('/orders/open/pdf/{id}','Orders\OrderCont@openPDF')->name('orderopenPDF');
+ROute::get('/orders/download/pdf/{id}','Orders\OrderCont@downloadPDF')->name('orderdownloadPDF');
 

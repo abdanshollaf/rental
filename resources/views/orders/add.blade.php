@@ -1,23 +1,18 @@
 @extends('layouts.app.app')
+@section('title')
+    <title>Admin Panel | Orders</title>
+@endsection
+@section('left-header')
+<li class="nav-item">
+  <a class="nav-link active"><h5>Orders / Order Baru</h5></a>
+</li>
+@endsection
+@include('orders/sidebar')
 @section('content')
 
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Order Baru</h1>
-              </div><!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item">Orders</a></li>
-                  <li class="breadcrumb-item active">Add Order</li>
-                </ol>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-          </div><!-- /.container-fluid -->
-        </div>
+<br/>
         <!-- /.content-header -->
     
         <!-- Main content -->
@@ -147,7 +142,7 @@
                             <br/>
                             <div class="form-group col-sm-2">
                                 <label for="harga">Dibayar</label>
-                                <input type="number" value="0" class="form-control" id="dibayar" name="detail[0][dibayar]" placeholder="Enter Price" required>
+                                <input type="number" value="0" class="form-control" id="dibayar" name="dibayar" placeholder="Enter Price" required>
                             </div>
                           <!-- /.card-body -->
                           <div class="container">
