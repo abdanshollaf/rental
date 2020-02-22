@@ -31,24 +31,6 @@ class CreateUsersTable extends Migration
             $table->string('no_telp');
             $table->timestamps();
         });
-        Schema::create('t_pelanggan',function(Blueprint $table){
-            $table->bigIncrements('id_customer');
-            $table->string('nama_pelanggan');
-            $table->string('alamat');
-            $table->string('no_telp');
-            $table->date('tgl_lahir');
-            $table->timestamps();
-        });
-        Schema::create('t_mobil',function(Blueprint $table){
-            $table->bigIncrements('id_mobil');
-            $table->string('id_vendor')->references('id_vendor')->on('t_vendor')->onDelete('cascade');
-            $table->string('no_polisi');
-            $table->string('merk');
-            $table->string('tipe');
-            $table->string('vendor');
-            $table->string('jumlah_seat');
-            $table->timestamps();
-        });
     }
 
     /**

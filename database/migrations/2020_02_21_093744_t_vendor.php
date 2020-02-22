@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Driver extends Migration
+class TVendor extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class Driver extends Migration
      */
     public function up()
     {
-        Schema::create('t_driver', function (Blueprint $table) {
+        Schema::create('t_vendor', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
+            $table->string('alamat');
+            $table->string('penanggungjawab');
             $table->string('no_telp');
             $table->timestamps();
         });
-
-        
     }
 
     /**

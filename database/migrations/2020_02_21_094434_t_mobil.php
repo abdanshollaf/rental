@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Driver extends Migration
+class TMobil extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class Driver extends Migration
      */
     public function up()
     {
-        Schema::create('t_driver', function (Blueprint $table) {
+        Schema::create('t_mobil', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('no_telp');
+            $table->bigInteger('id_vendor');
+            $table->index('id_vendor');
+            $table->foreign('id_vendor')->references('id')->on('t_vendor')->onDelete('cascade');
+            $table->string('no_polisi');
+            $table->string('merk');
+            $table->string('tipe');
+            $table->string('vendor');
             $table->timestamps();
         });
-
-        
     }
 
     /**

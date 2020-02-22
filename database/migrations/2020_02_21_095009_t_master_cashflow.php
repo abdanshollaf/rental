@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Driver extends Migration
+class TMasterCashflow extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class Driver extends Migration
      */
     public function up()
     {
-        Schema::create('t_driver', function (Blueprint $table) {
+        Schema::create('t_master_cashflow', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('no_telp');
+            $table->string('keterangan');
             $table->timestamps();
         });
-
-        
     }
 
     /**
