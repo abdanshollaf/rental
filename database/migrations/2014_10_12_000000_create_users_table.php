@@ -22,15 +22,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-
-        Schema::create('t_vendor',function(Blueprint $table){
-            $table->bigIncrements('id_vendor');
-            $table->string('nama');
-            $table->string('alamat');
-            $table->string('penanggungjawab');
-            $table->string('no_telp');
-            $table->timestamps();
-        });
     }
 
     /**
