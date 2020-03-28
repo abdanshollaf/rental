@@ -222,7 +222,7 @@
 <script type="text/javascript">
 $(document).on('click', '.edit-modal', function() {
           $('.modal-title').text('Edit Data Konsumen');
-          $('#nama_edit').val($(this).data('nama_pelanggan'));
+          $('#nama_edit').val($(this).data('nama'));
           $('#tipe_edit').val($(this).data('nama_tipe_pelanggan'));
           $('#email_edit').val($(this).data('email'));
           $('#alamat_edit').val($(this).data('alamat'));

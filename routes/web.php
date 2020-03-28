@@ -65,6 +65,13 @@ Route::get('/master/tipe_pelanggan/edit/{id}','Master\TipePelangganCont@edit')->
 Route::post('/master/tipe_pelanggan/update/{id}','Master\TipePelangganCont@update')->name('tipeupdate');
 Route::get('/master/tipe_pelanggan/delete/{id}','Master\TipePelangganCont@delete')->name('tipedelete');
 
+Route::get('/master/tipe_mobil/index','Master\TIpeMobilCont@index')->name('tipemobilindex');
+Route::get('/master/tipe_mobil/create','Master\TIpeMobilCont@create')->name('tipemobilcreate');
+Route::post('/master/tipe_mobil/store','Master\TIpeMobilCont@store')->name('tipemobilstore');
+Route::get('/master/tipe_mobil/edit/{id}','Master\TIpeMobilCont@edit')->name('tipemobiledit');
+Route::post('/master/tipe_mobil/update/{id}','Master\TIpeMobilCont@update')->name('tipemobilupdate');
+Route::get('/master/tipe_mobil/delete/{id}','Master\TIpeMobilCont@delete')->name('tipemobildelete');
+
 Route::get('/orders/index','Orders\OrderCont@index')->name('orderindex');
 Route::get('/orders/add','Orders\OrderCont@create')->name('orderadd');
 Route::post('/order/create','Orders\OrderCont@store')->name('orderstore');

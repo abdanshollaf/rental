@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\Master\TipePelangganModel;
+use App\Models\Master\TipeMobilModel;
 use DB;
 use Auth;
 
-class TipePelangganCont extends Controller
+class TipeMobilCont extends Controller
 {
     public function index()
     {
         if (Auth::check()) {
-            $data = TipePelangganModel::get();
-            return view('/master/tipe_pelanggan/data',['data' => $data]);
+            $data = TipeMobilModel::get();
+            return view('/master/tipe_kendaraan/data',['data' => $data]);
         }
         else {
             return redirect()->route('login');
@@ -34,8 +34,8 @@ class TipePelangganCont extends Controller
             // $this->validate($request, [
             //     'nama' => 'required'
             // ]);
-            $tipe = new TipePelangganModel();
-            $tipe->nama_tipe_pelanggan = $request->nama;
+            $tipe = new TipeMobilModel();
+            $tipe->nama_tipe = $request->nama;
             $tipe->save();
             return response()->json($tipe);
         } else {
@@ -53,8 +53,8 @@ class TipePelangganCont extends Controller
             // $this->validate($request, [
             //     'nama' => 'required'
             // ]);
-            $tipe = TipePelangganModel::find($id);
-            $tipe->nama_tipe_pelanggan = $request->nama;
+            $tipe = TipeMobilModel::find($id);
+            $tipe->nama_tipe = $request->nama;
             $tipe->save();
             return response()->json($tipe);
         } else {
@@ -64,7 +64,7 @@ class TipePelangganCont extends Controller
     }
 
     public function delete($id){
-        $tipe = TipePelangganModel::find($id)->delete();
+        $tipe = TipeMobilModel::find($id)->delete();
         return response()->json($tipe);
         
     }

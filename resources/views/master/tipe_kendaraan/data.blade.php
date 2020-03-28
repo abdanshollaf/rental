@@ -1,10 +1,10 @@
 @extends('layouts.app.app')
 @section('title')
-    <title>Admin Panel | Master Tipe Pelanggan</title>
+    <title>Admin Panel | Master Tipe Kendaraan</title>
 @endsection
 @section('left-header')
 <li class="nav-item">
-  <a class="nav-link active"><h5>Master Data / Master Tipe Pelanggan</h5></a>
+  <a class="nav-link active"><h5>Master Data / Master Tipe Kendaraan</h5></a>
 </li>
 @endsection
 @section('sidebar')
@@ -41,13 +41,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('tipeindex')}}" class="nav-link active">
+              <a href="{{route('tipeindex')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Master Tipe Pelanggan</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('tipemobilindex')}}" class="nav-link">
+              <a href="{{route('tipemobilindex')}}" class="nav-link active">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Master Tipe Kendaraan</p>
               </a>
@@ -130,7 +130,7 @@
                     <thead>
                             <tr>
                                 <th class="text-center" width="5">No.</th>
-                                <th>Nama Tipe Pelanggan</th>
+                                <th>Nama Tipe Kendaraan</th>
                                 <th width="125">Action</th>
                             </tr>
                         </thead>
@@ -141,19 +141,19 @@
                                     <div>{{$indexKey+1}}</div>
                                 </td>
                                   <td>
-                                      <div>{{$item->nama_tipe_pelanggan}}</div>
+                                      <div>{{$item->nama_tipe}}</div>
                                   </td>
                                   <td>
                                     <button class="btn btn-warning btn-sm edit-modal" data-id="{{$item->id}}"
-                                      data-nama="{{$item->nama_tipe_pelanggan}}">Edit</button>
+                                      data-nama="{{$item->nama_tipe}}">Edit</button>
                                     <button class="btn btn-danger btn-sm delete-modal" data-id="{{$item->id}}"
-                                      data-nama="{{$item->nama_tipe_pelanggan}}">Delete</button>
+                                      data-nama="{{$item->nama_tipe}}">Delete</button>
                                   </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    @include('master/tipe_pelanggan/modal')
+                    @include('master/tipe_kendaraan/modal')
             </div>
             <!-- /.card-body -->
           </div>

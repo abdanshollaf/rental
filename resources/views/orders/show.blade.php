@@ -28,6 +28,7 @@
                     </ul>
                 </div>
             @endif
+            
           <div class="row">
                 <div class="col-md-12 align-content-center">
                     <div class="card card-primary">
@@ -42,47 +43,156 @@
                         <!-- form start -->
                         <div class="invoice p-3 mb-3">
                             <!-- title row -->
+                            <style>
+                              hr {
+                                border: 0; 
+                                border-top: 3px double #000000;
+                                margin-bottom: 0.25em;
+                                margin-top: 0.25em;
+                              } 
+                              </style>
+                            <div class="col-md-12">
+                              <table>
+                                <tr width="10%">
+                                  <td>
+                                    <tr>
+                                      <td rowspan="6" width="20%">
+                                        <img src="{{asset('Picture1.png')}}" width="100%" height="100%">
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="60%">
+                                        <strong>KAIZEN TRANS INDONESIA</strong>
+                                      </td>
+                                      <td width="50%" style="text-align: right;">
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        Jalan Mekar Baru 1 No. 19 RT 01/006
+                                      </td>
+                                      <td width="50%" style="text-align: right;">
+                                       Rent Of Car
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        Cirendeu - Ciputat Timur, Tangerang Selatan
+                                      </td>
+                                      <td width="50%" style="text-align: right;">
+                                        Tour / Wisata
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        Phone: (021) 7404424 / 0812 1044 5144
+                                      </td>
+                                      <td width="50%" style="text-align: right;">
+                                        Transportation Services
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        Email: marketingkaizenrent@gmail.com
+                                      </td>
+                                      <td width="50%" style="text-align: right;">
+                                        Transportation Investment
+                                      </td>
+                                    </tr>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                                
+                            <!-- info row -->
+                            <br/>
+                            <hr>
+                            <div style="text-align: center;">
+                              <h3>INVOICE</h3>
+                            </div>
+                            <hr>
+                            <br/>
+
                             <div class="row">
                               <div class="col-12">
-                                <h4>
-                                  <i class="fas fa-globe"></i> Kaizen Trans Indonesia
-                                  <small class="float-right">Tanggal: {{ date('Y-m-d') }}</small>
-                                </h4>
+                                <table>
+                                  <tbody>
+                                      <tr>
+                                        <td width="30%">
+                                          <div>
+                                            No. Invoice
+                                          </div>
+                                        </td>
+                                        <td width="35%">
+                                          <div>
+                                            : adsadqwdsa
+                                          </div> 
+                                        </td>
+                                        <td width="20%">
+                                          <div>
+                                            Tanggal
+                                          </div> 
+                                        </td>
+                                        <td width="20%">
+                                          <div>
+                                            : <?php echo Carbon\Carbon::today()->toDateTimeString(); ?>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div>
+                                            Kepada
+                                          </div>
+                                        </td>
+                                        <td>
+                                          <div>
+                                            : {{$orders->nama_pelanggan}}
+                                          </div>
+                                        </td>
+                                        <td>
+                                          <div>
+                                            Jenis Pembayaran
+                                          </div>
+                                        </td>
+                                        <td>
+                                          <div>
+                                            : Transfer
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div>
+                                            Alamat
+                                          </div>
+                                        </td>
+                                        <td>
+                                          <div>
+                                            : <?php echo App\Models\Master\CustomerModel::find($orders->id_pelanggan)->alamat ?>
+                                          </div>
+                                        </td>
+                                        <td>
+                                          <div>
+                                            Batas Pembayaran
+                                          </div>
+                                        </td>
+                                        <td>
+                                          <div>
+                                            : {{date('d-m-Y',strtotime('+7 day', strtotime($orders->created_at)))}}
+                                          </div>
+                                        </td>
+                                      </tr>
+                                  </tbody>
+                                </table>
                               </div>
                               <!-- /.col -->
                             </div>
-                            <!-- info row -->
-                            <div class="row invoice-info">
-                              <div class="col-sm-4 invoice-col">
-                                Dari
-                                <address>
-                                  <strong>PT. Kaizen Trans Indonesia</strong><br>
-                                  795 Folsom Ave, Suite 600<br>
-                                  San Francisco, CA 94107<br>
-                                  Phone: (804) 123-5432<br>
-                                  Email: info@almasaeedstudio.com
-                                </address>
-                              </div>
                               <!-- /.col -->
-                              <div class="col-sm-4 invoice-col">
-                                Kepada
-                                <address>
-                                  <strong>{{$orders->nama_pelanggan}}</strong><br>
-                                  {{\App\Models\Master\CustomerModel::find($orders->id_pelanggan)->first()->alamat}}<br>
-                                  Phone: {{$orders->no_telp}}<br>
-                                  Email: {{$orders->email}}
-                                </address>
-                              </div>
-                              <!-- /.col -->
-                              <div class="col-sm-4 invoice-col">
-                                <b>Invoice #{{date('Ymd',strtotime($orders->created_at))."".$orders->id}}</b><br>
-                                <b>Order ID:</b> KTI - {{$orders->id}}<br>
-                                <b>Jatuh Tempo Pembayaran:</b> {{date('d-m-Y',strtotime('+7 day', strtotime($orders->created_at)))}}<br>
-                              </div>
                               <!-- /.col -->
                             </div>
                             <!-- /.row -->
-              
+                            <br/>
                             <!-- Table row -->
                             <div class="row">
                               <div class="col-12 table-responsive">
@@ -101,9 +211,9 @@
                                       <tr>
                                         <td><div>{{$indexKey+1}}</div></td>
                                         <td>{{\App\Models\Master\MobilModel::find($item->id_mobil)->first()->no_polisi}} - {{\App\Models\Master\MobilModel::find($item->id_mobil)->first()->merk}} {{\App\Models\Master\MobilModel::find($item->id_mobil)->first()->tipe}}</td>
-                                        <td><?php echo date_diff(date_create($item->start_date),date_create($item->finish_date))->format('%a') ?></td>
-                                        <td><?php if (date_diff(date_create($item->start_date),date_create($item->finish_date))->format('%a') != 0) {
-                                            echo $item->total_tagihan / date_diff(date_create($item->start_date),date_create($item->finish_date))->format('%a');}
+                                        <td><?php echo date_diff(date_create($item->start_date),date_add(date_create($item->finish_date),date_interval_create_from_date_string("1 days")))->format('%a') ?></td>
+                                        <td><?php if (date_diff(date_create($item->start_date),date_add(date_create($item->finish_date),date_interval_create_from_date_string("1 days")))->format('%a') != 0) {
+                                            echo $item->total_tagihan / date_diff(date_create($item->start_date),date_add(date_create($item->finish_date),date_interval_create_from_date_string("1 days")))->format('%a');}
                                             else {
                                                 echo $item->total_tagihan;
                                             }  ?></td>

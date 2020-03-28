@@ -85,39 +85,15 @@
                                     <br/>
                                     @foreach ($orderdetail as $key => $items)
                                         <div class="sumrow row">
-                                            <div class="form-group col-sm-5">
-                                                <label for="tgl">Tanggal Booking</label>
-                                                        <div class="input-group date" data-target-input="nearest">
-                                                            <input type="text" id="start_date{{$key}}" name="detail[{{$key}}][start_date]" value="{{$orderdetail[$key]->start_date}}" class="form-control datetimepicker-input" disabled/>
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                <div class="input-group-text"><i class="fas fa-arrow-right"></i></div>
-                                                            </div>
-                                                            <input type="text" id="end_date{{$key}}" name="detail[{{$key}}][end_date]" value="{{$orderdetail[$key]->finish_date}}" class="form-control datetimepicker-input" disabled/>
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                            </div>
-                                                        </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="alamat">Nama Penumpang</label>
+                                                <input type="text" class="form-control" id="pic" name="detail[{{$key}}][pic]" placeholder="Enter Passenger Name" value="{{$orderdetail[$key]->pic}}" required>      
                                             </div>
-                                            <div class="form-group col-sm-5">
-                                                <label for="jam">Jam Booking</label>
-                                                        <div class="input-group date" data-target-input="nearest">
-                                                            <input type="text" id="start_time{{$key}}" value="{{$orderdetail[$key]->start_time}}" name="detail[{{$key}}][start_time]" class="form-control datetimepicker-input" disabled/>
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
-                                                                <div class="input-group-text"><i class="fas fa-arrow-right"></i></div>
-                                                            </div>
-                                                            <input type="text" id="end_time{{$key}}" value="{{$orderdetail[$key]->finish_time}}" name="detail[{{$key}}][end_time]" class="form-control datetimepicker-input" disabled/>
-                                                            <div class="input-group-append" data-target="#end_time" data-toggle="datetimepicker">
-                                                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
-                                                            </div>
-                                                        </div>
+                                            <div class="form-group col-sm-3">
+                                                        <label for="alamat">No. Hp Penumpang</label>
+                                                        <input type="text" class="form-control" id="pic" name="detail[{{$key}}][hp_pic]" placeholder="Enter Passenger Contact" value="{{$orderdetail[$key]->hp_pic}}" required>      
                                             </div>
-                                            <div class="form-group col-sm-2">
-                                                <label for="input">Total Harga Input</label>
-                                                <input type="number" class="form-control" id="input{{$key}}" disabled value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][input]" placeholder="Enter Price" required>
-                                            </div>
-                                            <div class="form-group col-sm-2">
+                                            <div class="form-group col-sm-3">
                                                         <label for="mobil">Tipe Mobil</label>
                                                         <select name="detail[{{$key}}][mobil]" id="mobil{{$key}}" class="form-control" required>
                                                             <option selected="selected" value="{{$orderdetail[$key]->id_mobil}}"><?php echo \App\Models\Master\MobilModel::find($orderdetail[$key]->id_mobil)->no_polisi; echo " - "; echo \App\Models\Master\MobilModel::find($orderdetail[$key]->id_mobil)->merk; echo " "; echo \App\Models\Master\MobilModel::find($orderdetail[$key]->id_mobil)->tipe; ?></option>
@@ -126,7 +102,7 @@
                                                                 @endforeach
                                                         </select>
                                             </div>
-                                            <div class="form-group col-sm-2">
+                                            <div class="form-group col-sm-3">
                                                         <label for="driver">Driver</label>
                                                         <select name="detail[{{$key}}][driver]" id="driver{{$key}}" class="form-control" required>
                                                             <option selected="selected" value="{{$orderdetail[$key]->id_driver}}"><?php echo \App\Models\Master\DriverModel::find($orderdetail[$key]->id_driver)->nama ?></option>
@@ -135,6 +111,38 @@
                                                             @endforeach
                                                         </select>
                                             </div>
+                                            <div class="form-group col-sm-5">
+                                                <label for="tgl">Tanggal Booking</label>
+                                                        <div class="input-group date" data-target-input="nearest">
+                                                            <input type="date" id="start_date{{$key}}" name="detail[{{$key}}][start_date]" value="{{$orderdetail[$key]->start_date}}" class="form-control datetimepicker-input"/>
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                                <div class="input-group-text"><i class="fas fa-arrow-right"></i></div>
+                                                            </div>
+                                                            <input type="date" id="end_date{{$key}}" name="detail[{{$key}}][end_date]" value="{{$orderdetail[$key]->finish_date}}" class="form-control datetimepicker-input"/>
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="form-group col-sm-5">
+                                                <label for="jam">Jam Booking</label>
+                                                        <div class="input-group date" data-target-input="nearest">
+                                                            <input type="time" id="start_time{{$key}}" value="{{$orderdetail[$key]->start_time}}" name="detail[{{$key}}][start_time]" class="form-control datetimepicker-input"/>
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                                                                <div class="input-group-text"><i class="fas fa-arrow-right"></i></div>
+                                                            </div>
+                                                            <input type="text" id="end_time{{$key}}" value="{{$orderdetail[$key]->finish_time}}" name="detail[{{$key}}][end_time]" class="form-control datetimepicker-input"/>
+                                                            <div class="input-group-append" data-target="#end_time" data-toggle="datetimepicker">
+                                                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label for="input">Harga Input</label>
+                                                <input type="number" class="form-control" id="input{{$key}}" disabled value="{{$orderdetail[$key]->total_tagihan}}" name="detail[{{$key}}][input]" placeholder="Enter Price" required>
+                                            </div>
                                             <div class="form-group col-sm-3">
                                                         <label for="jemput">Alamat Penjemputan</label>
                                                         <input type="text" class="form-control" value="{{$orderdetail[$key]->jemput}}" id="jemput{{$key}}" name="detail[{{$key}}][jemput]" placeholder="Enter Departure Address" required>
@@ -142,6 +150,14 @@
                                             <div class="form-group col-sm-3">
                                                         <label for="tujuan">Tujuan</label>
                                                         <input type="text" class="form-control" value="{{$orderdetail[$key]->tujuan}}" id="tujuan{{$key}}" name="detail[{{$key}}][tujuan]" placeholder="Enter Arrival Address" required>
+                                            </div>
+                                            <div class="form-group col-sm-1">
+                                                        <label for="carprice">KM Awal</label>
+                                                        <input type="number" class="form-control" id="km_awal{{$key}}" value="{{$orderdetail[$key]->km_awal}}" name="detail[{{$key}}][km_awal]" placeholder="Enter KM" required>
+                                            </div>
+                                            <div class="form-group col-sm-1">
+                                                        <label for="carprice">KM Akhir</label>
+                                                        <input type="number" class="form-control" id="km_akhir{{$key}}" value="{{$orderdetail[$key]->km_akhir}}" name="detail[{{$key}}][km_akhir]" placeholder="Enter KM" required>
                                             </div>
                                             <div class="form-group col-sm-2">
                                                         <label for="carprice">Biaya Mobil</label>
@@ -174,6 +190,10 @@
                                             <div class="form-group col-sm-2">
                                                         <label for="titip">Biaya Titip</label>
                                                         <input type="number" class="form-control price" id="titip{{$key}}" value="{{$orderdetail[$key]->biaya_titip}}" name="detail[{{$key}}][titip]" placeholder="Enter Price" required>
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                        <label for="claim">Biaya Claim</label>
+                                                        <input type="number" class="form-control price" id="claim{{$key}}" value="{{$orderdetail[$key]->biaya_claim}}" name="detail[{{$key}}][claim]" placeholder="Enter Price" required>
                                             </div>
                                             <div class="form-group col-sm-2">
                                                         <label for="ppn">PPN</label>

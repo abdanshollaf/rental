@@ -31,12 +31,12 @@ class VendorCont extends Controller
     public function store(Request $request){
 
         if ($request->all()) {
-            $this->validate($request, [
-                'nama' => 'required',
-                'alamat' => 'required',
-                'pj' => 'required',
-                'no_telp' => 'required'
-            ]);
+            // $this->validate($request, [
+            //     'nama' => 'required',
+            //     'alamat' => 'required',
+            //     'pj' => 'required',
+            //     'no_telp' => 'required'
+            // ]);
             $vendor = new VendorModel();
             $vendor->nama = $request->nama;
             $vendor->alamat = $request->alamat;
@@ -56,12 +56,12 @@ class VendorCont extends Controller
 
     public function update(Request $request, $id){
         if ($request->all()) {
-            $this->validate($request, [
-                'nama' => 'required',
-                'alamat' => 'required',
-                'pj' => 'required',
-                'no_telp' => 'required'
-            ]);
+            // $this->validate($request, [
+            //     'nama' => 'required',
+            //     'alamat' => 'required',
+            //     'pj' => 'required',
+            //     'no_telp' => 'required'
+            // ]);
             $vendor = VendorModel::find($id);
             $vendor->nama = $request->nama;
             $vendor->alamat = $request->alamat;

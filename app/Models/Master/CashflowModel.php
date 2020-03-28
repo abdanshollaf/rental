@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class CashflowModel extends Model
 {
     protected $table = 't_cashflow';
-    protected $fillable = ['amount','oleh'];
+    protected $fillable = ['amount','oleh','dihapus'];
 }

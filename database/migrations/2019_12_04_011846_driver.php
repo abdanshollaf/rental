@@ -15,8 +15,11 @@ class Driver extends Migration
     {
         Schema::create('t_driver', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('no_telp');
+            $table->string('nama')->nullable();
+            $table->string('no_ktp')->nullable();
+            $table->date('sim')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('no_telp')->nullable();
             $table->timestamps();
         });
 

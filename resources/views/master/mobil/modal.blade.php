@@ -23,6 +23,19 @@
                           <p class="errorVendor text-center alert alert-danger invisible"></p>
                       </div>
                       <div class="form-group col-md-6">
+                        <label class="control-label" for="nama">Kategori Kendaraan :</label>
+                        <select name="tipe_mobil" id="tipe_mobil" class="form-control">
+                          <option value="">-- Select Kategori --</option>
+                          <?php
+                          $kategori = \App\Models\Master\TipeMobilModel::get();
+                          ?>
+                          @foreach ($kategori as $item)
+                              <option value="{{$item->id}}">{{$item->nama_tipe}}</option>
+                          @endforeach
+                        </select>
+                        <p class="errorVendor text-center alert alert-danger invisible"></p>
+                    </div>
+                      <div class="form-group col-md-6">
                           <label class="control-label" for="no_polisi">Nomor Polisi :</label>
                           <input type="text" class="form-control" id="no_polisi" autofocus required>
                           <p class="errorPolisi text-center alert alert-danger invisible"></p>
@@ -37,6 +50,11 @@
                           <input type="text" class="form-control" id="tipe" autofocus required>
                           <p class="errorTipe text-center alert alert-danger invisible"></p>
                       </div>
+                      <div class="form-group col-md-6">
+                        <label class="control-label" for="stnk">Masa Berlaku STNK :</label>
+                        <input type="text" class="form-control datetimepicker-input" placeholder="Enter Date" data-target="#stnk" data-toggle="datetimepicker" id="stnk"/>
+                        <p class="errorStnk text-center alert alert-danger invisible"></p>
+                    </div>
                   </div>
               </form>
               <div class="modal-footer">
@@ -58,6 +76,11 @@
   $(document).on('click', '.add-modal', function() {
       // Empty input fields
       $('#vendor').val('');
+      $('#tipe_mobil').val('');
+      $('#stnk').datetimepicker({
+                                      format: 'YYYY-MM-DD',
+                                      viewMode: 'years',
+                                  });
       $('#no_polisi').val('');
       $('#merk').val('');
       $('#tipe').val('');
@@ -76,9 +99,11 @@
           data: {
               '_token': $('input[name=_token]').val(),
               'vendor': $('#vendor').val(),
+              'tipe_mobil': $('#tipe_mobil').val(),
               'no_polisi': $('#no_polisi').val(),
               'merk': $('#merk').val(),
-              'tipe': $('#tipe').val()
+              'tipe': $('#tipe').val(),
+              'stnk': $('#stnk').val(),
           },
           success: function(data) {
               $('.errorVendor').addClass('invisible');
@@ -115,7 +140,7 @@
                       toastr.error('Error added Consumer! No Data Entry!', 'Error Alert', {timeOut: 5000});
                   } else {
                       toastr.success('Successfully added Car!', 'Success Alert', {timeOut: 5000});
-                      $('#example1').prepend("<tr class='item" + data.id + "'><td class='col1 text-center'>" + data.id + "</td><td>" + data.vendor + "</td><td>" + data.no_polisi + "</td><td>" + data.merk + "</td><td>" + data.tipe + "</td><td><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-vendor='" + data.vendor + "' data-no_polisi='" + data.no_polisi + "' data-merk='" + data.merk + "' data-tipe='" + data.tipe + "'>Edit</button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-vendor='" + data.vendor + "' data-no_polisi='" + data.no_polisi + "' data-merk='" + data.merk + "' data-tipe='" + data.tipe + "'>Delete</button></td></tr>");
+                      $('#example1').prepend("<tr class='item" + data.id + "'><td class='col1 text-center'>" + data.id + "</td><td>" + data.vendor + "</td><td>" + data.no_polisi + "</td><td>" + data.merk + "</td><td>" + data.tipe + "</td><td> <?php $tipe2 = App\Models\Master\TipeMobilModel::all()->where('id', '=', " + data.tipe_mobil + "); ?> @foreach ($tipe2 as $items) <div>{{$items->nama_tipe}}</div> @endforeach</td><td>" + data.stnk + "</td><td><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-vendor='" + data.vendor + "' data-no_polisi='" + data.no_polisi + "' data-merk='" + data.merk + "' data-tipe='" + data.tipe +  "' data-kategori='" + data.tipe_mobil + "' data-stnk='" + data.stnk + "'>Edit</button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-vendor='" + data.vendor + "' data-no_polisi='" + data.no_polisi + "' data-merk='" + data.merk + "' data-tipe='" + data.tipe +  "' data-kategori='" + data.tipe_mobil + "' data-stnk='" + data.stnk + "'>Delete</button></td></tr>");
                       $('.col1').each(function (index) {
                       $(this).html(index+1);
                   }); 
@@ -151,6 +176,19 @@
                           <p class="errorEditVendor text-center alert alert-danger invisible"></p>
                       </div>
                       <div class="form-group col-md-6">
+                        <label class="control-label" for="nama">Kategori Kendaraan :</label>
+                        <select name="tipe_mobilEdit" id="tipe_mobilEdit" class="form-control">
+                          <option value="">-- Select Kategori --</option>
+                          <?php
+                          $kategori = \App\Models\Master\TipeMobilModel::get();
+                          ?>
+                          @foreach ($kategori as $item)
+                              <option value="{{$item->id}}">{{$item->nama_tipe}}</option>
+                          @endforeach
+                        </select>
+                        <p class="errorEditKategori text-center alert alert-danger invisible"></p>
+                    </div>
+                      <div class="form-group col-md-6">
                           <label class="control-label" for="no_polisi">Nomor Polisi :</label>
                           <input type="text" class="form-control" id="no_polisi_edit" autofocus required>
                           <p class="errorEditPolisi text-center alert alert-danger invisible"></p>
@@ -165,6 +203,11 @@
                           <input type="text" class="form-control" id="tipe_edit" autofocus required>
                           <p class="errorEditTipe text-center alert alert-danger invisible"></p>
                       </div>
+                      <div class="form-group col-md-6">
+                        <label class="control-label" for="stnk">Masa Berlaku STNK :</label>
+                        <input type="text" class="form-control datetimepicker-input" placeholder="Enter Date" data-target="#stnk" data-toggle="datetimepicker" id="stnkEdit"/>
+                        <p class="errorEditStnk text-center alert alert-danger invisible"></p>
+                    </div>
                   </div>
               </form>
               <div class="modal-footer">
@@ -185,9 +228,14 @@
 $(document).on('click', '.edit-modal', function() {
           $('.modal-title').text('Edit Data Kendaraan');
           $('#vendor_edit').val($(this).data('vendor'));
+          $('#tipe_mobilEdit').val($(this).data('tipe_mobil'));
           $('#no_polisi_edit').val($(this).data('no_polisi'));
           $('#merk_edit').val($(this).data('merk'));
           $('#tipe_edit').val($(this).data('tipe'));
+          $('#stnk').datetimepicker({
+                                      format: 'YYYY-MM-DD',
+                                      viewMode: 'years',
+                                  });
           id = $(this).data('id');
           $('#editModal').modal('show');
       });
@@ -203,10 +251,12 @@ $(document).on('click', '.edit-modal', function() {
               url: '/master/mobil/update/' + id,
               data: {
                   '_token': $('input[name=_token]').val(),
-                  'vendor': $('#vendor_edit').val(),
-                  'no_polisi': $('#no_polisi_edit').val(),
-                  'merk': $('#merk_edit').val(),
-                  'tipe': $('#tipe_edit').val()
+                  'vendor': $('#vendor').val(),
+                  'tipe_mobil': $('#tipe_mobil').val(),
+                  'no_polisi': $('#no_polisi').val(),
+                  'merk': $('#merk').val(),
+                  'tipe': $('#tipe').val(),
+                  'stnk': $('#stnk').val(),
               },
               success: function(data) {
                   $('.errorEditVendor').addClass('hidden');
@@ -238,7 +288,7 @@ $(document).on('click', '.edit-modal', function() {
                       }
                   } else {
                       toastr.success('Successfully updated Car Data!', 'Success Alert', {timeOut: 5000});
-                      $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td class='col1 text-center'>" + data.id + "</td><td>" + data.vendor + "</td><td>" + data.no_polisi + "</td><td>" + data.merk + "</td><td>" + data.tipe + "</td><td><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-vendor='" + data.vendor + "' data-no_polisi='" + data.no_polisi + "' data-merk='" + data.merk + "' data-tipe='" + data.tipe + "'>Edit</button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-vendor='" + data.vendor + "' data-no_polisi='" + data.no_polisi + "' data-merk='" + data.merk + "' data-tipe='" + data.tipe + "'>Delete</button></td></tr>");
+                      $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td class='col1 text-center'>" + data.id + "</td><td>" + data.vendor + "</td><td>" + data.no_polisi + "</td><td>" + data.merk + "</td><td>" + data.tipe + "</td><td>" + data.tipe_mobil + "</td><td>" + data.stnk + "</td><td><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-vendor='" + data.vendor + "' data-no_polisi='" + data.no_polisi + "' data-merk='" + data.merk + "' data-tipe='" + data.tipe + "' data-tipe_mobil='" + data.tipe_mobil +"' data-stnk='" + data.stnk + "'>Edit</button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-vendor='" + data.vendor + "' data-no_polisi='" + data.no_polisi + "' data-merk='" + data.merk + "' data-tipe='" + data.tipe +  "' data-tipe_mobil='" + data.tipe_mobil +"' data-stnk='" + data.stnk + "'>Delete</button></td></tr>");
                       $('.col1').each(function (index) {
                           $(this).html(index+1);
                       });

@@ -49,12 +49,12 @@
                             <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Booking Orders</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Ongoing Orders</a>
                             </li>
                             <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">End Orders</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>            
                     <div class="card-body">
@@ -70,7 +70,7 @@
                                                     <th class="text-center" width="3%">No.</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>No. Telp</th>
-                                                    <th>Jumlah Booking</th>
+                                                    <th>Jumlah Unit</th>
                                                     <th>Total Harga</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -97,7 +97,7 @@
                                     </table> 
                             </div>
                             @include('orders/modal')
-                            <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                            {{-- <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
                                     <table id="example2" class="table table-bordered table-striped">
                                             <thead>
                                                     <tr>
@@ -148,7 +148,7 @@
                                                     </tr>
                                                 </tfoot>
                                             </table>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <!-- /.card -->

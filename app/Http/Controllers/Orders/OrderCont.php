@@ -43,6 +43,10 @@ class OrderCont extends Controller
     }
 
     public function store(Request $request){
+        // dd($request->all());
+        // if (condition) {
+        //     # code...
+        // }
         $sum = 0;
         foreach($request->detail as $key=>$item){
             $sum += $item['harga'];
@@ -79,6 +83,7 @@ class OrderCont extends Controller
             $order->estimated = $sum;
             $order->actual = $sum;
             $order->oleh = Auth::user()->id;
+            $order->note = $request->note;
             $order->save();
             // dd($order->status);
             if ($order->status == 1) {
@@ -103,6 +108,8 @@ class OrderCont extends Controller
                 $order_detail = new OrderDetailModel();
                 $order_detail->id_order = $order->id;
                 $order_detail->id_tipe_pelanggan = $request->tipe;
+                $order_detail->pic = $request->pic;
+                $order_detail->hp_pic = $request->hp_pic;
                 $order_detail->no_telp = intval($request->telp);
                 $order_detail->id_pelanggan = $customer->id;
                 $order_detail->id_driver = $value['driver'];
@@ -113,6 +120,8 @@ class OrderCont extends Controller
                 $order_detail->start_time = date('H:i', strtotime($value['start_time']));
                 $order_detail->finish_time = date('H:i', strtotime($value['end_time']));
                 $order_detail->id_mobil = $value['mobil'];
+                $order_detail->km_awal = $value['km_awal'];
+                $order_detail->km_akhir = $value['km_akhir'];
                 $order_detail->harga_mobil = 0;
                 $order_detail->harga_driver = 0;
                 $order_detail->uang_jalan = 0;
@@ -122,6 +131,7 @@ class OrderCont extends Controller
                 $order_detail->overtime = 0;
                 $order_detail->biaya_titip = 0;
                 $order_detail->biaya_lainnya = 0;
+                $order_detail->biaya_claim = 0;
                 $order_detail->total_harga = intval($value['harga']);
                 $order_detail->diskon = 0;
                 $order_detail->ppn = 0;
@@ -152,6 +162,7 @@ class OrderCont extends Controller
     }
 
     public function update($id, Request $request){
+        // dd($request->all());
         $sum = 0;
         foreach($request->detail as $key=>$item){
             $sum += $item['total_harga'];
@@ -199,6 +210,7 @@ class OrderCont extends Controller
             $order->actual = $sum;
             $order->dibayar = $request->dibayar;
             $order->oleh = Auth::user()->id;
+            $order->note = $request->note;
             $order->save();
 
             $order_details = DB::select("select * from t_order_detail where id_order = '".$id."'");
@@ -217,6 +229,8 @@ class OrderCont extends Controller
                         'id_driver' => $request->detail[$key]['driver'],
                         'jemput' => $request->detail[$key]['jemput'],
                         'tujuan' => $request->detail[$key]['tujuan'],
+                        'km_awal' => $request->detail[$key]['km_awal'],
+                        'km_akhir' => $request->detail[$key]['km_akhir'],
                         'harga_mobil' => $request->detail[$key]['carprice'],
                         'harga_driver' => $request->detail[$key]['driverprice'],
                         'uang_jalan' => $request->detail[$key]['jalan'],
@@ -225,6 +239,7 @@ class OrderCont extends Controller
                         'makan_inap' => $request->detail[$key]['makaninap'],
                         'overtime' => $request->detail[$key]['overtime'],
                         'biaya_titip' => $request->detail[$key]['titip'],
+                        'biaya_claim' => $request->detail[$key]['claim'],
                         'biaya_lainnya' => $biaya_lainnya,
                         'total_harga' => $request->detail[$key]['biaya'],
                         'diskon' => $request->detail[$key]['diskon'],

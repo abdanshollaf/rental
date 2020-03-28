@@ -15,15 +15,13 @@ class TCashflow extends Migration
     {
         Schema::create('t_cashflow', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_order');
-            $table->index('id_order');
-            $table->foreign('id_order')->references('id')->on('t_order')->onDelete('cascade');
-            $table->bigInteger('id_master_cashflow');
-            $table->index('id_master_cashflow');
-            $table->foreign('id_master_cashflow')->references('id')->on('t_master_cashflow')->onDelete('cascade');
-            $table->bigInteger('amount');
-            $table->string('oleh');
-            $table->string('dihapus');
+            $table->unsignedBigInteger('id_order');
+            $table->foreign('id_order')->references('id')->on('t_order');
+            $table->unsignedBigInteger('id_master_cashflow');
+            $table->foreign('id_master_cashflow')->references('id')->on('t_master_cashflow');
+            $table->bigInteger('amount')->nullable();
+            $table->string('oleh')->nullable();
+            $table->string('dihapus')->nullable();
             $table->timestamps();
         });
     }

@@ -15,8 +15,8 @@ class TMasterCashflow extends Migration
     {
         Schema::create('t_master_cashflow', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('keterangan');
+            $table->string('nama')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

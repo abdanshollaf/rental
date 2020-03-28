@@ -30,14 +30,14 @@ class CustomerCont extends Controller
 
     public function store(Request $request){
         if ($request->all()) {
-            $this->validate($request,[
-                'nama' => 'required',
-                'alamat' => 'required',
-                'no_telp' => 'required',
-                'email' => 'required',
-                'tgl_lahir' => 'required',
-                'tipe' => 'required',
-            ]);
+            // $this->validate($request,[
+            //     'nama' => 'required',
+            //     'alamat' => 'required',
+            //     'no_telp' => 'required',
+            //     'email' => 'required',
+            //     'tgl_lahir' => 'required',
+            //     'tipe' => 'required',
+            // ]);
             $customer = new CustomerModel();
             $customer->nama_pelanggan = $request->nama;
             $customer->alamat = $request->alamat;
@@ -45,6 +45,7 @@ class CustomerCont extends Controller
             $customer->email = $request->email;
             $customer->tgl_lahir = $request->tgl_lahir;
             $customer->id_tipe_pelanggan = $request->tipe;
+            $customer->status_order = 0;
             $customer->save();
             return response()->json($customer);
         }
@@ -68,14 +69,14 @@ class CustomerCont extends Controller
     }
 
     public function update(Request $request, $id){
-        $this->validate($request, [
-            'nama' => 'required',
-            'alamat' => 'required',
-            'telp' => 'required',
-            'email' => 'required',
-            'tgl_lahir' => 'required',
-            'tipe' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'nama' => 'required',
+        //     'alamat' => 'required',
+        //     'telp' => 'required',
+        //     'email' => 'required',
+        //     'tgl_lahir' => 'required',
+        //     'tipe' => 'required'
+        // ]);
         $data = $request->all();
         if ($data) {
             CustomerModel::find($id)->update($data);

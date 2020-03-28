@@ -11,13 +11,23 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                                 <label class="control-label" for="nama">Nama Driver :</label>
-                                <input type="text" class="form-control" id="nama" autofocus require>
+                                <input type="text" class="form-control" id="nama" autofocus required>
                                 <p class="errorNama text-center alert alert-danger invisible"></p>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label" for="no_telp">No. Hp :</label>
-                            <input type="text" class="form-control" id="no_telp" autofocus require>
+                            <input type="text" class="form-control" id="no_telp" autofocus required>
                             <p class="errorNo_telp text-center alert alert-danger invisible"></p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label" for="no_ktp">No. KTP :</label>
+                            <input type="text" class="form-control" id="no_ktp" autofocus required>
+                            <p class="errorNo_ktp text-center alert alert-danger invisible"></p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label" for="sim">Masa Berlaku SIM :</label>
+                            <input type="text" class="form-control datetimepicker-input" placeholder="Enter Date Of Driving License Expired" data-target="#sim" data-toggle="datetimepicker" id="sim"/>
+                            <p class="errorSim text-center alert alert-danger invisible"></p>
                         </div>
                     </div>
                 </form>
@@ -42,7 +52,11 @@
         // Empty input fields
         $('#nama').val('');
         $('#no_telp').val('');
-
+        $('#no_ktp').val('');
+        $('#sim').datetimepicker({
+                                      format: 'YYYY-MM-DD',
+                                      viewMode: 'years',
+                                  });
         $('.modal-title').text('Add Data Driver');
         $('#addModal').modal('show');
     });
@@ -58,11 +72,15 @@
             data: {
                 '_token': $('input[name=_token]').val(),
                 'nama': $('#nama').val(),
-                'no_telp': $('#no_telp').val()
+                'no_telp': $('#no_telp').val(),
+                'no_ktp' :  $('#no_ktp').val(),
+                'sim' :  $('#sim').val(),
             },
             success: function(data) {
                 $('.errorNama').addClass('invisible');
                 $('.errorNo_telp').addClass('invisible');
+                $('.errorNo_ktp').addClass('invisible');
+                $('.errorSim').addClass('invisible');
 
                 if ((data.errors)) {
                     setTimeout(function () {
@@ -78,6 +96,14 @@
                         $('.errorNo_telp').removeClass('invisible');
                         $('.errorNo_telp').text(data.errors.no_telp);
                     }
+                    if (data.errors.no_ktp) {
+                        $('.errorNo_ktp').removeClass('invisible');
+                        $('.errorNo_ktp').text(data.errors.no_ktp);
+                    }
+                    if (data.errors.sim) {
+                        $('.errorSim').removeClass('invisible');
+                        $('.errorSim').text(data.errors.sim);
+                    }
                 }
                 else {
                     if (!data) {
@@ -85,7 +111,7 @@
                         toastr.error('Error added Driver! No Data Entry!', 'Error Alert', {timeOut: 5000});
                     } else {
                         toastr.success('Successfully added Driver!', 'Success Alert', {timeOut: 5000});
-                        $('#example1').prepend("<tr class='item" + data.id + "'><td class='col1 text-center'>" + data.id + "</td><td>" + data.nama + "</td><td>" + data.no_telp + "</td><td><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-nama='" + data.nama + "' data-no_telp='" + data.no_telp + "'>Edit</button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-nama='" + data.nama + "' data-no_telp='" + data.no_telp + "'>Delete</button></td></tr>");
+                        $('#example1').prepend("<tr class='item" + data.id + "'><td class='col1 text-center'>" + data.id + "</td><td>" + data.nama + "</td><td>" + data.no_telp + "</td><td>" + data.no_ktp + "</td><td>" + data.sim + "</td><td><button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-nama='" + data.nama + "' data-no_telp='" + data.no_telp + "' data-no_ktp='" + data.no_ktp + "' data-sim='" + data.sim +"'>Edit</button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-nama='" + data.nama + "' data-no_telp='" + data.no_telp + "' data-no_ktp='" + data.no_ktp + "' data-sim='" + data.sim + "'>Delete</button></td></tr>");
                         $('.col1').each(function (index) {
                         $(this).html(index+1);
                     }); 
@@ -117,6 +143,16 @@
                             <input type="text" class="form-control" id="no_telp_edit" autofocus required>
                             <p class="errorNo_telp text-center alert alert-danger invisible"></p>
                         </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label" for="no_telp">No. KTP :</label>
+                            <input type="text" class="form-control" id="no_ktp_edit" autofocus required>
+                            <p class="errorNo_telp text-center alert alert-danger invisible"></p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label" for="no_telp">Masa Berlaku SIM :</label>
+                            <input type="text" class="form-control datetimepicker-input" placeholder="Enter Date Of Birth" data-target="#tgl_lahir" data-toggle="datetimepicker" id="sim_edit"/>
+                            <p class="errorNo_telp text-center alert alert-danger invisible"></p>
+                        </div>
                     </div>
                 </form>
                 <div class="modal-footer">
@@ -138,6 +174,11 @@ $(document).on('click', '.edit-modal', function() {
             $('.modal-title').text('Edit Data Driver');
             $('#nama_edit').val($(this).data('nama'));
             $('#no_telp_edit').val($(this).data('no_telp'));
+            $('#no_ktp_edit').val($(this).data('no_ktp'));
+            $('#sim_edit').datetimepicker({
+                                      format: 'YYYY-MM-DD',
+                                      viewMode: 'years',
+                                  });
             id = $(this).data('id');
             $('#editModal').modal('show');
         });
@@ -154,7 +195,9 @@ $(document).on('click', '.edit-modal', function() {
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'nama': $('#nama_edit').val(),
-                    'no_telp': $('#no_telp_edit').val()
+                    'no_telp': $('#no_telp_edit').val(),
+                    'no_ktp': $('#no_ktp_edit').val(),
+                    'sim': $('#sim_edit').val(),
                 },
                 success: function(data) {
                     $('.errorEditNama').addClass('hidden');
@@ -176,7 +219,7 @@ $(document).on('click', '.edit-modal', function() {
                         }
                     } else {
                         toastr.success('Successfully updated Driver Data!', 'Success Alert', {timeOut: 5000});
-                        $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td class='col1'>" + data.id + "</td><td>" + data.nama + "</td><td>" + data.no_telp + "</td><td> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-nama='" + data.nama + "' data-no_telp='" + data.no_telp + "'>Edit</button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-nama='" + data.nama + "' data-no_telp='" + data.no_telp + "'>Delete</button></td></tr>");
+                        $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td class='col1'>" + data.id + "</td><td>" + data.nama + "</td><td>" + data.no_telp + "</td><td>" + data.no_ktp + "</td><td>" + data.sim + "</td><td>  <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-nama='" + data.nama + "' data-no_telp='" + data.no_telp + "'>Edit</button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-nama='" + data.nama + "' data-no_telp='" + data.no_telp + "'>Delete</button></td></tr>");
                         $('.col1').each(function (index) {
                             $(this).html(index+1);
                         });

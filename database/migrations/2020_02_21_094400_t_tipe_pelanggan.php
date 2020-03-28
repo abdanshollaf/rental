@@ -15,7 +15,7 @@ class TTipePelanggan extends Migration
     {
         Schema::create('t_tipe_pelanggan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_tipe_pelanggan');
+            $table->string('nama_tipe_pelanggan')->nullable();
             $table->timestamps();
         });
     }

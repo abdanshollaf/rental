@@ -15,10 +15,10 @@ class TVendor extends Migration
     {
         Schema::create('t_vendor', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('alamat');
-            $table->string('penanggungjawab');
-            $table->string('no_telp');
+            $table->string('nama')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('penanggungjawab')->nullable();
+            $table->string('no_telp')->nullable();
             $table->timestamps();
         });
     }

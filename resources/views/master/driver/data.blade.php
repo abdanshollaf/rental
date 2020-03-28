@@ -33,9 +33,15 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('custindex')}}" class="nav-link">
+              <a href="{{route('tipeindex')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Master Customer</p>
+                <p>Master Tipe Pelanggan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('tipemobilindex')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Tipe Kendaraan</p>
               </a>
             </li>
             <li class="nav-item">
@@ -45,23 +51,23 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{route('driverindex')}}" class="nav-link active">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Driver</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('custindex')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Customer</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{route('carindex')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Master Mobil</p>
               </a>
             </li>
-            <li class="nav-item">
-                <a href="{{route('driverindex')}}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Master Driver</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('tipeindex')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Master Tipe Pelanggan</p>
-                </a>
-              </li>
           </ul>
         </li>
         <li class="nav-item">
@@ -127,6 +133,8 @@
                                 <th class="text-center" width="5">No.</th>
                                 <th>Nama Driver</th>
                                 <th>No. Telp</th>
+                                <th>No. KTP</th>
+                                <th>Masa Berlaku SIM</th>
                                 <th width="125">Action</th>
                             </tr>
                             @csrf
@@ -144,8 +152,18 @@
                                       <div>{{$item->no_telp}}</div>
                                   </td>
                                   <td>
-                                      <button class="btn btn-warning btn-sm edit-modal" data-id="{{$item->id}}" data-nama="{{$item->nama}}" data-no_telp="{{$item->no_telp}}">Edit</button>
-                                      <button class="btn btn-danger btn-sm delete-modal" data-id="{{$item->id}}" data-nama="{{$item->nama}}" data-no_telp="{{$item->no_telp}}">Delete</button>
+                                      <div>{{$item->no_ktp}}</div>
+                                  </td>
+                                  <td>
+                                      <div>{{$item->sim}}</div>
+                                  </td>
+                                  <td>
+                                      <button class="btn btn-warning btn-sm edit-modal" data-id="{{$item->id}}" 
+                                            data-nama="{{$item->nama}}" data-no_telp="{{$item->no_telp}}"
+                                            data-no_ktp="{{$item->no_ktp}}" data-sim="{{$item->sim}}">Edit</button>
+                                      <button class="btn btn-danger btn-sm delete-modal" data-id="{{$item->id}}"
+                                            data-nama="{{$item->nama}}" data-no_telp="{{$item->no_telp}}"
+                                            data-no_ktp="{{$item->no_ktp}}" data-sim="{{$item->sim}}">Delete</button>
                                   </td>
                                 </tr>
                             @endforeach

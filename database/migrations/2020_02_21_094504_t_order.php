@@ -15,21 +15,21 @@ class TOrder extends Migration
     {
         Schema::create('t_order', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_tipe_pelanggan');
-            $table->index('id_tipe_pelanggan');
-            $table->foreign('id_tipe_pelanggan')->references('id')->on('t_tipe_pelanggan')->onDelete('cascade');
-            $table->bigInteger('id_pelanggan');
-            $table->index('id_pelanggan');
-            $table->foreign('id_pelanggan')->references('id')->on('t_pelanggan')->onDelete('cascade');
-            $table->string('nama_pelanggan');
-            $table->string('no_telp');
-            $table->string('email');
-            $table->bigInteger('estimated');
-            $table->bigInteger('actual');
-            $table->string('status');
-            $table->bigInteger('dibayar');
-            $table->string('oleh');
-            $table->string('dihapus');
+            $table->unsignedBigInteger('id_tipe_pelanggan');
+            $table->foreign('id_tipe_pelanggan')->references('id')->on('t_tipe_pelanggan');
+            $table->unsignedBigInteger('id_pelanggan');
+            $table->foreign('id_pelanggan')->references('id')->on('t_pelanggan');
+            $table->string('nama_pelanggan')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->string('email')->nullable();
+            $table->bigInteger('estimated')->default(0);
+            $table->bigInteger('actual')->default(0);
+            $table->string('status')->nullable();
+            $table->bigInteger('dibayar')->nullable();
+            $table->string('oleh')->nullable();
+            $table->string('dihapus')->nullable();
+            $table->string('note')->nullable();
+            $table->string('invoice')->nullable();
             $table->timestamps();
         });
     }

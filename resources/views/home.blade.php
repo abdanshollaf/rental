@@ -33,9 +33,15 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('custindex')}}" class="nav-link">
+              <a href="{{route('tipeindex')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Master Customer</p>
+                <p>Master Tipe Pelanggan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('tipemobilindex')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Tipe Kendaraan</p>
               </a>
             </li>
             <li class="nav-item">
@@ -45,23 +51,23 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{route('driverindex')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Driver</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('custindex')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Customer</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{route('carindex')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Master Mobil</p>
               </a>
             </li>
-            <li class="nav-item">
-                <a href="{{route('driverindex')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Master Driver</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('tipeindex')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Master Tipe Pelanggan</p>
-                </a>
-              </li>
           </ul>
         </li>
         <li class="nav-item">

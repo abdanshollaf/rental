@@ -15,15 +15,14 @@ class TPelanggan extends Migration
     {
         Schema::create('t_pelanggan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_pelanggan');
-            $table->string('email');
-            $table->string('alamat');
-            $table->string('no_telp');
-            $table->date('tgl_lahir');
-            $table->bigInteger('id_tipe_pelanggan');
-            $table->index('id_tipe_pelanggan');
-            $table->foreign('id_tipe_pelanggan')->references('id')->on('t_tipe_pelanggan')->onDelete('cascade');
-            $table->string('status_order');
+            $table->string('nama_pelanggan')->nullable();
+            $table->string('email')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->date('tgl_lahir')->nullable();
+            $table->unsignedBigInteger('id_tipe_pelanggan');
+            $table->foreign('id_tipe_pelanggan')->references('id')->on('t_tipe_pelanggan');
+            $table->string('status_order')->nullable();
             $table->timestamps();
         });
     }

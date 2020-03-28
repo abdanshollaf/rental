@@ -39,13 +39,16 @@ class DriverCont extends Controller
     public function store(Request $request){
 
         if ($request->all()) {
-            $this->validate($request, [
-                'nama' => 'required',
-                'no_telp' => 'required'
-            ]);;
+            // $this->validate($request, [
+            //     'nama' => 'required',
+            //     'no_telp' => 'required'
+            // ]);;
             $driver = new DriverModel();
             $driver->nama = $request->nama;
             $driver->no_telp = $request->no_telp;
+            $driver->no_ktp = $request->no_ktp;
+            $driver->sim =  $request->sim;
+            // $driver->foto = $request->file('foto')->move(public_path().'/upload/','foto/', $request->file('foto')->getClientOriginalName('foto'));
             $driver->save();
             return response()->json($driver);
         } else {
@@ -68,13 +71,16 @@ class DriverCont extends Controller
 
         
         if ($request->all()) {
-            $this->validate($request, [
-                'nama' => 'required',
-                'no_telp' => 'required'
-            ]);
+            // $this->validate($request, [
+            //     'nama' => 'required',
+            //     'no_telp' => 'required'
+            // ]);
             $driver = DriverModel::find($id);
             $driver->nama = $request->nama;
             $driver->no_telp = $request->no_telp;
+            $driver->no_ktp = $request->no_ktp;
+            $driver->sim =  $request->sim;
+            // $driver->foto = $request->file('foto')->move(public_path().'/upload/','foto/', $request->file('foto')->getClientOriginalName('foto'));
             $driver->save();
             return response()->json($driver);
         } else {
@@ -84,8 +90,9 @@ class DriverCont extends Controller
     }
 
     public function delete($id){
-        $driver = DriverModel::find($id)->delete();
-
+        $driver = DriverModel::find($id);
+        unlink($driver->foto);
+        $driver->delete();
         return response()->json($driver);
     }
 }

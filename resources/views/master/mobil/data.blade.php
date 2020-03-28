@@ -41,9 +41,15 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('custindex')}}" class="nav-link">
+              <a href="{{route('tipeindex')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Master Customer</p>
+                <p>Master Tipe Pelanggan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('tipemobilindex')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Tipe Kendaraan</p>
               </a>
             </li>
             <li class="nav-item">
@@ -53,23 +59,23 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{route('driverindex')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Driver</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('custindex')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Customer</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{route('carindex')}}" class="nav-link active">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Master Mobil</p>
               </a>
             </li>
-            <li class="nav-item">
-                <a href="{{route('driverindex')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Master Driver</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('tipeindex')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Master Tipe Pelanggan</p>
-                </a>
-              </li>
           </ul>
         </li>
         <li class="nav-item">
@@ -128,6 +134,8 @@
                                 <th>No. Polisi</th>
                                 <th>Merk</th>
                                 <th>Tipe</th>
+                                <th>Kategori Kendaraan</th>
+                                <th>Masa Berlaku STNK</th>
                                 <th width="125">Action</th>
                             </tr>
                         </thead>
@@ -148,6 +156,17 @@
                                   </td>
                                   <td>
                                       <div>{{$item->tipe}}</div>
+                                  </td>
+                                  <td>
+                                    <?php
+                                    $tipe2 = App\Models\Master\TipeMobilModel::all()->where('id', '=', $item['id_tipe_mobil']);
+                                    ?>
+                                    @foreach ($tipe2 as $items)
+                                    <div>{{$items->nama_tipe}}</div>
+                                    @endforeach
+                                  </td>
+                                  <td>
+                                      <div>{{$item->stnk}}</div>
                                   </td>
                                   <td>
                                     <button class="btn btn-warning btn-sm edit-modal" data-id="{{$item->id}}"
