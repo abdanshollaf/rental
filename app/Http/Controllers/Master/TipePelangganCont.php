@@ -39,7 +39,6 @@ class TipePelangganCont extends Controller
             $tipe->save();
             return response()->json($tipe);
         } else {
-            
             return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
         }
     }

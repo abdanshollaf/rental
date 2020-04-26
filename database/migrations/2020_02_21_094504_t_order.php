@@ -15,6 +15,7 @@ class TOrder extends Migration
     {
         Schema::create('t_order', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('id_invoice')->nullable();
             $table->unsignedBigInteger('id_tipe_pelanggan');
             $table->foreign('id_tipe_pelanggan')->references('id')->on('t_tipe_pelanggan');
             $table->unsignedBigInteger('id_pelanggan');
@@ -28,8 +29,7 @@ class TOrder extends Migration
             $table->bigInteger('dibayar')->nullable();
             $table->string('oleh')->nullable();
             $table->string('dihapus')->nullable();
-            $table->string('note')->nullable();
-            $table->string('invoice')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

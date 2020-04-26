@@ -14,11 +14,9 @@ class TCashflowDelete extends Migration
     public function up()
     {
         Schema::create('t_cashflow_delete', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigInteger('id');
             $table->unsignedBigInteger('id_order');
-            $table->foreign('id_order')->references('id')->on('t_order');
             $table->unsignedBigInteger('id_master_cashflow');
-            $table->foreign('id_master_cashflow')->references('id')->on('t_master_cashflow');
             $table->bigInteger('amount')->nullable();
             $table->string('oleh')->nullable();
             $table->string('dihapus')->nullable();

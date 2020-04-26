@@ -14,18 +14,13 @@ class TOrderDetailDelete extends Migration
     public function up()
     {
         Schema::create('t_order_detail_delete', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigInteger('id');
             $table->unsignedBigInteger('id_order');
-            $table->foreign('id_order')->references('id')->on('t_order');
             $table->unsignedBigInteger('id_tipe_pelanggan');
-            $table->foreign('id_tipe_pelanggan')->references('id')->on('t_tipe_pelanggan');
             $table->unsignedBigInteger('id_pelanggan');
-            $table->foreign('id_pelanggan')->references('id')->on('t_pelanggan');
             $table->string('no_telp');
             $table->unsignedBigInteger('id_driver');
-            $table->foreign('id_driver')->references('id')->on('t_driver');
             $table->unsignedBigInteger('id_mobil');
-            $table->foreign('id_mobil')->references('id')->on('t_mobil');
             $table->date('pic')->nullable();
             $table->date('hp_pic')->nullable();
             $table->date('start_date')->nullable();

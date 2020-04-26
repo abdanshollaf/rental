@@ -15,31 +15,31 @@ class Trigger extends Migration
     {
         DB::unprepared('CREATE TRIGGER t_t_order_delete AFTER DELETE ON `t_order` FOR EACH ROW
                 BEGIN
-                   INSERT INTO `t_order_delete` (`id`,`id_tipe_pelanggan`,`id_pelanggan`,`nama_pelanggan`,
+                   INSERT INTO `t_order_delete` (`id`,`id_invoice`,`id_tipe_pelanggan`,`id_pelanggan`,`nama_pelanggan`,
                                                 `no_telp`,`email`,`estimated`,`actual`,
                                                 `status`,`dibayar`,`oleh`,`dihapus`, `note`,
-                                                `created_at`,`updated_at`)
-                    VALUES (OLD.id, OLD.id_tipe_pelanggan, OLD.id_pelanggan, OLD.nama_pelanggan,
+                                                `created_at`)
+                    VALUES (OLD.id, OLD.id_invoice, OLD.id_tipe_pelanggan, OLD.id_pelanggan, OLD.nama_pelanggan,
                                                 OLD.no_telp, OLD.email, OLD.estimated, OLD.actual,
                                                 OLD.status, OLD.dibayar, OLD.oleh, OLD.dihapus, OLD.note,
-                                                OLD.created_at, OLD.updated_at);
+                                                OLD.created_at);
                 END');
 
         DB::unprepared('CREATE TRIGGER t_t_order_detail_delete AFTER DELETE ON `t_order_detail` FOR EACH ROW
                 BEGIN
-                   INSERT INTO `t_order_delete` (`id`,`id_order`,`id_tipe_pelanggan`,`id_pelanggan`,
+                   INSERT INTO `t_order_detail_delete` (`id`,`id_order`,`id_tipe_pelanggan`,`id_pelanggan`,
                                                 `no_telp`,`id_driver`,`id_mobil`,`pic`,`hp_pic`,`start_date`,
                                                 `finish_date`,`jemput`,`tujuan`,`start_time`,
                                                 `finish_time`,`km_awal`,`km_akhir`,`harga_mobil`,`harga_driver`,`uang_jalan`,`bbm`,`tol_parkir`,
                                                 `makan_inap`,`overtime`,`biaya_titip`,`biaya_lainnya`, `biaya_claim`,`total_harga`,`diskon`,
-                                                `ppn`,`pph`,`total_tagihan`,`by`,`created_at`,`updated_at`)
+                                                `ppn`,`pph`,`total_tagihan`,`by`,`created_at`)
                     VALUES (OLD.`id`, OLD.`id_order`, OLD.`id_tipe_pelanggan`, OLD.`id_pelanggan`,
                                                 OLD.`no_telp`, OLD.`id_driver`, OLD.`id_mobil`, OLD.`pic`,OLD.`hp_pic`, OLD.`start_date`,
                                                 OLD.`finish_date`, OLD.`jemput`, OLD.`tujuan`, OLD.`start_time`,
                                                 OLD.`finish_time`, OLD.`km_awal`, OLD.`km_akhir`, OLD.`harga_mobil`, OLD.`harga_driver`,
                                                 OLD.`uang_jalan`, OLD.`bbm`, OLD.`tol_parkir`, OLD.`makan_inap`,
                                                 OLD.`overtime`, OLD.`biaya_titip`, OLD.`biaya_lainnya`, OLD.`biaya_claim`, OLD.`total_harga`, OLD.`diskon`,
-                                                OLD.`ppn`, OLD.`pph`, OLD.`total_tagihan`, OLD.`by`, OLD.`created_at`, `OLD.updated_at`);
+                                                OLD.`ppn`, OLD.`pph`, OLD.`total_tagihan`, OLD.`by`, OLD.`created_at`);
                 END');
 
                 DB::unprepared('CREATE TRIGGER t_t_cashflow_delete AFTER DELETE ON `t_cashflow` FOR EACH ROW

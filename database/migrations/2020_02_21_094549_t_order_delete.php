@@ -14,11 +14,10 @@ class TOrderDelete extends Migration
     public function up()
     {
         Schema::create('t_order_delete', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigInteger('id');
+            $table->string('id_invoice')->nullable();
             $table->unsignedBigInteger('id_tipe_pelanggan');
-            $table->foreign('id_tipe_pelanggan')->references('id')->on('t_tipe_pelanggan');
             $table->unsignedBigInteger('id_pelanggan');
-            $table->foreign('id_pelanggan')->references('id')->on('t_pelanggan');
             $table->string('nama_pelanggan')->nullable();
             $table->string('no_telp')->nullable();
             $table->string('email')->nullable();
@@ -29,7 +28,6 @@ class TOrderDelete extends Migration
             $table->string('oleh')->nullable();
             $table->string('dihapus')->nullable();
             $table->string('note')->nullable();
-            $table->string('invoice')->nullable();
             $table->timestamps();
         });
     }

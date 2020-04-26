@@ -18,10 +18,10 @@
             </div>
         </div>
     </div>
-  </div>
-  
-  <script type="text/javascript">
-  $(document).on('click', '.delete-modal', function() {
+</div>
+
+<script type="text/javascript">
+    $(document).on('click', '.delete-modal', function() {
     $('.modal-title').text('Delete Data Driver');
     $('#deleteModal').modal('show');
     id = $(this).data('id');
@@ -38,13 +38,19 @@
         data: {
             '_token': $('input[name=_token]').val(),
         },
-        success: function(data) {
-            toastr.success('Successfully deleted Order!', 'Success Alert', {timeOut: 5000});
-            $('.items' + id).remove();
-            $('.col1').each(function (index) {
-                $(this).html(index+1);
-            });
+        statusCode: {
+            500: function(data) {
+                toastr.error('Failed deleted Order!', 'Error Alert', {timeOut: 5000});
+            },
+            200: function(data)
+            {
+                toastr.success('Successfully deleted Order!', 'Success Alert', {timeOut: 5000});
+                $('.items' + id).remove();
+                $('.col1').each(function (index) {
+                    $(this).html(index+1);
+                });
+            }
         }
     });
   });
-  </script>
+</script>

@@ -19,24 +19,22 @@ class DriverCont extends Controller
     {
         if (Auth::check()) {
             $data = DriverModel::get();
-            return view('/master/driver/data',['data' => $data]);
-        }
-        else {
+            return view('/master/driver/data', ['data' => $data]);
+        } else {
             return redirect()->route('login');
         }
-            
-
     }
 
-    public function show(){
-        
+    public function show()
+    {
     }
 
-    public function create(){
-
+    public function create()
+    {
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         if ($request->all()) {
             // $this->validate($request, [
@@ -56,20 +54,20 @@ class DriverCont extends Controller
         }
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         if (Auth::check()) {
             $data = DriverModel::find($id);
-            return view('master/driver/edit',['data' => $data]);
-        }
-        else {
+            return view('master/driver/edit', ['data' => $data]);
+        } else {
             return redirect()->route('login');
         }
-        
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
-        
+
         if ($request->all()) {
             // $this->validate($request, [
             //     'nama' => 'required',
@@ -84,12 +82,13 @@ class DriverCont extends Controller
             $driver->save();
             return response()->json($driver);
         } else {
-            
+
             return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
         }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $driver = DriverModel::find($id);
         unlink($driver->foto);
         $driver->delete();

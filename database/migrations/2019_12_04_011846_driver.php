@@ -17,6 +17,7 @@ class Driver extends Migration
             $table->bigIncrements('id');
             $table->string('nama')->nullable();
             $table->string('no_ktp')->nullable();
+            $table->string('alamat')->nullable();
             $table->date('sim')->nullable();
             $table->string('foto')->nullable();
             $table->string('no_telp')->nullable();
