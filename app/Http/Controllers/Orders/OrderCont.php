@@ -49,8 +49,6 @@ class OrderCont extends Controller
         }
     }
 
-
-
     public function store(Request $request)
     {
         $date = Carbon::now();
@@ -363,5 +361,17 @@ class OrderCont extends Controller
         }
         $delete = OrderModel::find($id)->delete();
         return response()->json($delete);
+    }
+
+    // nih gua tambahin function baru buat filter, 
+    // yg di create dibikin hari ini sampe 3 hari kedepan aja defaultnya
+    // pake api get keknya asik wkkw
+    public function filterCnD(Request $request){
+        $start_date = Input::get('startDate');
+        $end_date = Input::get('endDate');
+        $mobil = DB::select("select * from t_mobil where id_mobil not in ( select id_mobil from t_order_detail where start_date >= '".date('Y-m-d',$start_date)."' and finish_date <= '".date('Y-m-d',$end_date)."'")
+        $driver = DB::select("select * from t_driver where id_driver not in ( select id_driver from t_order_detail where start_date >= '".date('Y-m-d',$start_date)."' and finish_date <= '".date('Y-m-d',$end_date)."'")
+
+        return [$mobil,$driver];
     }
 }
