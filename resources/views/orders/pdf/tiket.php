@@ -43,11 +43,11 @@
           </table>
           <table style=" font-size: 12px">
             <tr width="100%">
-              <td rowspan="7" wdith="5%"></td>
-              <td rowspan="7" style="border-style: double" width="30%">
+              <td rowspan="9" wdith="5%"></td>
+              <td rowspan="9" style="border-style: double" width="30%">
 
               </td>
-              <td rowspan="7" width="5%"></td>
+              <td rowspan="9" width="5%"></td>
               <td width="25%">
                 Kode Booking
               </td>
@@ -106,12 +106,22 @@
             </tr>
             <tr>
               <td>
+                Tanggal Berakhir
+              </td>
+              <td>
+                : <?php echo \App\Helpers\Tanggal::Indo($value->finish_date) ?>
+              </td>
+            </tr>
+            <tr>
+              <td>
                 Jumlah Hari
               </td>
               <td>
-                : <?php echo substr($value->start_time, 0, 5) ?>
+                : <?php echo date_diff(date_create($value->start_date), date_add(date_create($value->finish_date), date_interval_create_from_date_string("1 days")))->format('%a') ?> Hari
               </td>
             </tr>
+            <br>
+            <br>
           </table>
         </td>
       </tr>
