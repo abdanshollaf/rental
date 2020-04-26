@@ -39,8 +39,10 @@ class OrderCont extends Controller
             $tipe = TipePelangganModel::get();
             foreach ($request->detail as $key => $value) {
                 $mobil = DB::select("select * from t_mobil where id_mobil not in ( select id_mobil from t_order_detail where start_date >= '".date('Y-m-d',$value['start_date'])."' and finish_date <= '".date('Y-m-d',$value['end_date'])."'")
-                $driver = DB::select("select * from t_driver where id_driver not in ( select id_d from t_order_detail where start_date >= '".date('Y-m-d',$value['start_date'])."' and finish_date <= '".date('Y-m-d',$value['end_date'])."'")
+                $driver = DB::select("select * from t_driver where id_driver not in ( select id_driver from t_order_detail where start_date >= '".date('Y-m-d',$value['start_date'])."' and finish_date <= '".date('Y-m-d',$value['end_date'])."'")
             }
+            $mobil = MobilModel::get();
+            
             return view('orders/add', ['tipe' => $tipe, 'mobil' => $mobil, 'driver' => $driver]);
         } else {
             return redirect()->route('login');
