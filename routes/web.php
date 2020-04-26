@@ -81,3 +81,4 @@ Route::get('/orders/delete/{id}', 'Orders\OrderCont@delete')->name('orderdelete'
 Route::get('/orders/print-pdf/{id}/invoice', 'Orders\OrderCont@invoice')->name('invoice');
 Route::get('/orders/print-pdf/{id}/spj', 'Orders\OrderCont@spj')->name('spj');
 Route::get('/orders/print-pdf/{id}/tiket', 'Orders\OrderCont@tiket')->name('tiket');
+Route::get('/orders/(:num?)','Orders\OrdersCont@filterCnD')->name('order.filter');
